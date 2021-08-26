@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       searchCategoryFilter: "",
-      targetRoute: "/ecosystem?categories",
+      targetRoute: "/ecosystem?categories=",
       parsedTargetPath: "",
       params: [],
       allChip: {
@@ -139,9 +139,9 @@ export default {
         this.params.push(item.param); item.isActive = !item.isActive;
 
       this.allChip.isActive = false;
-      this.$router.push({
-          path: this.parsedTargetPath
-      })
+      // this.$router.push({
+      //   path: this.parsedTargetPath
+      // })
     },
     clearSelection() {
       this.allChip.isActive = true
@@ -154,11 +154,13 @@ export default {
   computed: {
     routeParams() {
       let paramString = ""
-      this.params.forEach(param => {
-        paramString += "," + param
+      this.params.forEach((param, i) => {
+        paramString += (i == 0 ? '' :  ",") + param
       })
       let parsedTargetPath = `${this.targetRoute}${paramString}`
-      this.parsedTargetPath = parsedTargetPath
+      this.$router.push({
+        path: parsedTargetPath
+      })
       return parsedTargetPath
     }
   }

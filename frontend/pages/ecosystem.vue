@@ -3,6 +3,7 @@
     <div class="sticky-wrapper">
       <div class="search-form">
         <v-row>
+          {{$route.query}}
           <v-text-field
             placeholder="e.g. Explorer"
           >

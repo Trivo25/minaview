@@ -6,7 +6,6 @@
       placeholder="e.g. Wallets"
     />
     <v-chip
-      :to="allChip.to"
       router
       exact
       label
@@ -139,9 +138,9 @@ export default {
         this.params.push(item.param); item.isActive = !item.isActive;
 
       this.allChip.isActive = false;
-      // this.$router.push({
-      //   path: this.parsedTargetPath
-      // })
+      this.$router.push({
+        path: this.parsedTargetPath
+      })
     },
     clearSelection() {
       this.allChip.isActive = true
@@ -180,6 +179,12 @@ export default {
   margin: 5px !important;
   width: auto !important;
   margin-right: 5px !important;
+  color:  rgb(39, 39, 39) !important;
+}
+
+.v-chip--active {
+  background-color: rgb(39, 39, 39) !important;
+  color:  rgb(39, 39, 39) !important;
 }
 
 .chip-active {

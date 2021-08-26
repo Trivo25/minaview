@@ -3,10 +3,10 @@
     <div class="sticky-wrapper">
       <div class="search-form">
         <v-row>
-          {{$route.query}}
           <v-text-field
-            placeholder="e.g. Explorer"
+            placeholder="e.g. Best-Staking-Pool-ever"
           >
+          
           </v-text-field>
           <span class="sort-option">GitHub Stars
             <v-icon v-if="sortGithubStars" @click="sortGithubStars = !sortGithubStars" color="#a5a5a5">mdi-arrow-up</v-icon>
@@ -111,6 +111,9 @@ export default {
         gridTemplateColumns: ""//`repeat(${this.numberOfColumns}, minmax(100px, 1fr))`
       }
     },
+    parseParams() {
+      return this.$route.query.categories.split(',');
+    }
   },
 }
 </script>

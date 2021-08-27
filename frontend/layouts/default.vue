@@ -16,7 +16,7 @@
       <v-btn
         outlined
         plain
-        @click="addServiceDialog = !addServiceDialog"
+        to="/request"
         class="add-service-button"
       >
         <v-icon>mdi-plus</v-icon>
@@ -38,12 +38,15 @@
 import TagNav from "../components/TagNav.vue"
 
 export default {
+  name: "default",
+  components: {
+    TagNav,
+  },
   data() {
     return {
       clipped: true,
       drawer: true,
       fixed: false,
-      addServiceDialog: false,
       items: [
         {
           icon: 'mdi-apps',

@@ -1,5 +1,6 @@
 <template>
   <v-app dark>
+    <NotificationCard @closeNotification="showInformation = false" v-if="showInformation" />
     <v-navigation-drawer
       v-model="drawer"
       :clipped="clipped"
@@ -37,11 +38,13 @@
 
 <script>
 import TagNav from "../components/TagNav.vue"
+import NotificationCard from "../components/NotificationCard.vue"
 
 export default {
   name: "default",
   components: {
     TagNav,
+    NotificationCard
   },
   data() {
     return {
@@ -122,10 +125,13 @@ export default {
       ],
       miniVariant: false,
       title: 'View',
+      showInformation: false
     }
   },
   mounted() {
-
+    setTimeout(() => {
+      this.showInformation = true
+    }, 8000)
   }
 
 }

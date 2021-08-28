@@ -63,7 +63,7 @@ export default {
   width: auto;
   max-height: 100%;
   cursor: pointer;
-  animation: hoverCardIn 1s forwards;
+  animation: hoverCardIn .5s forwards;
 }
 
 .card-chips {
@@ -71,7 +71,8 @@ export default {
 }
 
 .card:hover {
-  animation: hoverCardOut 1s forwards;
+  animation: hoverCardOut .5s forwards;
+  background-color: #202020;
 }
 
 @keyframes hoverCardOut {
@@ -79,13 +80,13 @@ export default {
     transform: scale(1.0)
   }
   100% {
-    transform: scale(1.05)
+    transform: scale(1.03)
   }
 }
 
 @keyframes hoverCardIn {
   0% {
-    transform: scale(1.05)
+    transform: scale(1.03)
   }
   100% {
     transform: scale(1.0)

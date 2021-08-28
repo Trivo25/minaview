@@ -8,10 +8,37 @@ import (
 
 func GetterCategories(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	db.QueryServices()
-	json.NewEncoder(w).Encode(Response{
-		Error: "Some error has occured",
-		Data:  struct{}{},
-	})
+	categories, err := db.QueryCategories()
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(Response{
+			Error: err.Error(),
+			Data:  nil,
+		})
+	} else {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(Response{
+			Error: "",
+			Data:  categories,
+		})
+	}
+}
+func GetterServices(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	services, err := db.QueryServices()
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(Response{
+			Error: err.Error(),
+			Data:  nil,
+		})
+	} else {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(Response{
+			Error: "",
+			Data:  services,
+		})
+	}
 }

@@ -7,7 +7,13 @@ type Service struct {
 	ServiceDescription string
 	ServiceLogo        string
 	ServiceWebsite     string
-	Categories         []Category
+	/*
+		Hash consists of ServiceName, ServiceWebsite and ServiceInserted
+	*/
+	ServiceHash     string
+	ServiceInserted int
+	ServiceCreator  string
+	Categories      []Category
 }
 
 // defines the structure of the category fields

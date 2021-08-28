@@ -9,9 +9,10 @@ import (
 
 func HandleRequests() {
 
-	http.HandleFunc("/getCategories", GetterCategories)
+	// http.HandleFunc("/getCategories", GetterCategories)
 	r := mux.NewRouter()
 	r.HandleFunc("/getCategories", GetterCategories)
+	r.HandleFunc("/getServices", GetterServices)
 	http.Handle("/", r)
 	srv := &http.Server{
 		Handler: r,

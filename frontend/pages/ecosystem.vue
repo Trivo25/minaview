@@ -199,11 +199,12 @@ export default {
 .sticky-wrapper {
   width: 100%;
   height: 50px;
+  top: 0;
   /* border: solid 1px red; */
-  position: sticky;
+  /* position: sticky;
   backdrop-filter: blur(10px);
   top: 60px;
-  z-index: 5;
+  z-index: 5; */
   /* centering */
   /* margin-right: 0px !important;
   transform: translate(-50%, -50%);

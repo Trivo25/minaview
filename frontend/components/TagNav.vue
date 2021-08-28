@@ -50,8 +50,6 @@ export default {
       parsedTargetPath: "",
       params: [],
       allChip: {
-          icon: 'mdi-apps',
-          iconColor: "#5442f5",
           title: 'All',
           to: '/ecosystem',
           total: 5,
@@ -59,72 +57,54 @@ export default {
         },
       items: [
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#7542f5",
           title: 'Official Resources',
           param: 'official-resources',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#8d42f5",
           title: 'Wallets',
           param: 'wallets',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#a442f5",
           title: 'Explorers',
           param: 'explorers',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#b642f5",
           title: 'Tools',
           param: 'tools',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#8d42f5",
           title: 'Staking Pools',
           param: 'staking-pools',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#d442f5",
           title: 'Monitoring and Dashboards',
-          param: 'monitoring-und-dashboards',
+          param: 'monitoring-and-dashboards',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#f542ef",
           title: 'Ledger Apps',
           param: 'ledger',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#f5426f",
           title: 'News, Resources and Articles',
           param: 'news-articles',
           total: 5,
           isActive: false
         },
         {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#f54242",
           title: 'International Communities',
           param: 'communities',
           total: 5,

@@ -1,6 +1,7 @@
 # mina-view
 
 An ecosystem overview for the MINA protocol.
+available under www.dev.minaview.com
 
 ## Build Setup
 

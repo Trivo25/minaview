@@ -6,7 +6,7 @@
       </div>
       <h1 class="project-title">{{ project.title }}</h1>
       <div class="card-content">
-        {{ project.description }}
+        <p>{{ project.description }}</p>
       </div>
       <div class="card-chips">
         <v-chip
@@ -51,7 +51,8 @@ export default {
 }
 
 .project-title {
-  font-weight: 500;
+  margin-top: 15px;
+  font-weight: 600;
   color: grey;
 }
 
@@ -99,4 +100,7 @@ export default {
   margin: 2px;
 }
 
+.card-content p {
+  font-family: "Roboto"
+}
 </style>

@@ -9,7 +9,7 @@
     <TagNav/>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon color="#6a00ff" @click.stop="drawer = !drawer" />
       <img class="mina-logo" src="../assets/mina_logo_large.svg"/>
       <h1 class="title">{{ title }}</h1>
       <v-spacer />
@@ -28,8 +28,9 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }} - MINAwatch is a community developed project and is not affiliated to Mina Foundation or O(1)Labs.</span>
+    <v-footer fixed=true app>
+      <!-- <span>&copy; {{ new Date().getFullYear() }} - MINAwatch is a community developed project and is not affiliated to Mina Foundation or O(1)Labs. </span>  -->
+      <span><a class="made-by" target="_blank" href="https://github.com/Trivo25">Made by Trivo on GitHub </a> <v-icon>mdi-github</v-icon></span>
     </v-footer>
   </v-app>
 </template>
@@ -123,7 +124,8 @@ export default {
       title: 'View',
     }
   },
-  created() {
+  mounted() {
+
   }
 
 }
@@ -163,17 +165,13 @@ export default {
     rgb(15, 32, 39),
     rgb(32, 58, 67),
     rgb(44, 83, 100)
-  ) !important;
+  ) !important; 
 }
 
 .v-footer {
-  text-align: center;
-  justify-content: center;
+  backdrop-filter: blur(10px);
 }
-.v-footer span {
-  font-weight: 100;
-  color: grey;
-}
+
 
 .title {
   font-weight: 100;
@@ -186,12 +184,32 @@ export default {
 
 .add-service-button {
   background: rgb(91,0,255);
-  background: linear-gradient(148deg, rgba(91,0,255,0.44629521730567223) 0%, rgba(156,0,255,1) 50%, rgba(202,255,234,0.7708918539325843) 100%);
-  color: rgb(204, 204, 204);
+  background: linear-gradient(148deg, rgba(91,0,255,0.44629521730567223) 0%, rgba(156,0,255,1) 50%, rgba(153, 255, 214, 0.771) 100%);
+  color: rgb(255, 255, 255);
   padding: 10px;
   border: 1px solid black;
   border-radius: 3px;
   font-weight: 500;
 }
+
+.v-footer {
+  text-align: center;
+  justify-content: center;
+}
+.v-footer span {
+  font-weight: 100;
+  color: grey;
+}
+
+.made-by {
+  font-weight: 100;
+  color: grey;
+  text-decoration: dashed !important;
+}
+
+.made-by:active, .made-by:visited, .made-by:link {
+  text-decoration: dashed !important;
+}
+
 
 </style>

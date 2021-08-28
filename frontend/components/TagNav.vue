@@ -1,36 +1,41 @@
 <template>
-  <div class="tag-nav-wrapper">
+  <div class="nav-tags-wrapper">
     <v-text-field
       class="category-filter-field"
       v-model="searchCategoryFilter"
       placeholder="e.g. Wallets"
     />
-    <v-chip
-      router
-      exact
-      label
-      class="chip-item"
-      :class="{'chip-active' : allChip.isActive }"
-      @click="clearSelection()"
-    >
-      <span class="category-title">{{ allChip.title.toUpperCase() }}</span>
-      <span class="category-total">({{ allChip.total }})</span>
-    </v-chip>
-    <v-chip
+    <v-row>
+      <v-chip
+        router
+        exact
+        label
+        class="chip-item"
+        :class="{'chip-active' : allChip.isActive }"
+        @click="clearSelection()"
+      >
+        <span class="category-title">{{ allChip.title.toUpperCase() }}</span>
+        <span class="category-total">({{ allChip.total }})</span>
+      </v-chip>
+    </v-row>
+    <v-row
       v-for="(item, i) in items"
       :key="i"
-      :to="routeParams"
-      router
-      exact
-      label
-      v-show="filterCategories(item)"
-      class="chip-item"
-      :class="{'chip-active' : item.isActive }"
-      @click="changeSelection(item)"
     >
-      <span class="category-title">{{ item.title.toUpperCase() }}</span>
-      <span class="category-total">({{ item.total }})</span>
-    </v-chip>
+      <v-chip
+        :to="routeParams"
+        router
+        exact
+        label
+        v-show="filterCategories(item)"
+        class="chip-item"
+        :class="{'chip-active' : item.isActive }"
+        @click="changeSelection(item)"
+      >
+        <span class="category-title">{{ item.title.toUpperCase() }}</span>
+        <span class="category-total">({{ item.total }})</span>
+      </v-chip>
+    </v-row>
   </div>
 </template>
 
@@ -169,8 +174,9 @@ export default {
 <style scoped>
   
 
-.tag-nav-wrapper {
-
+.nav-tags-wrapper {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .chip-item {
@@ -180,6 +186,14 @@ export default {
   width: auto !important;
   margin-right: 5px !important;
   color:  rgb(39, 39, 39) !important;
+  width: auto !important;
+  margin-right: 5px !important;
+  font-size: 0.8rem !important;
+}
+
+.chip-item:hover, .v-chip:hover {
+  background-color: rgb(106, 0, 255) !important;
+  color: none !important;
 }
 
 .v-chip--active {

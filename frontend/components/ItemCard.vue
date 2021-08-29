@@ -68,6 +68,10 @@ export default {
   color: grey;
 }
 
+.theme--light .project-title {
+  color: black;
+}
+
 .card { 
   background-color: #171717;
   border-radius: 15px;
@@ -78,6 +82,11 @@ export default {
   animation: hoverCardIn .5s forwards;
 }
 
+.theme--light .card {
+  background-color: rgb(238, 238, 238);
+  border: 2px black solid;
+}
+
 .card-chips {
   margin-top: 15px;
 }
@@ -85,6 +94,10 @@ export default {
 .card:hover {
   animation: hoverCardOut .5s forwards;
   background-color: #202020;
+}
+
+.theme--light .card:hover {
+  background-color: rgb(223, 223, 223);
 }
 
 @keyframes hoverCardOut {
@@ -111,6 +124,11 @@ export default {
   color: rgba(255, 115, 0, 0.4);
   border-color: rgb(85, 85, 85);
   margin: 2px;
+}
+
+
+.theme--light .tag-chip {
+  color: rgba(255, 115, 0, 1);
 }
 
 .card-content p {

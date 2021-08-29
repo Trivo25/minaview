@@ -19,8 +19,7 @@ export const mutations = {
 
 export const actions = {
   async getServices(context) {
-    const res = (await this.$axios.get('http://localhost:8000/getServices'))
-      .data
+    const res = (await this.$axios.get('/getServices')).data
     if (res.Data == null && res.ErrorCode != 200) {
       return new Promise((resolve, reject) => {
         reject({
@@ -36,8 +35,7 @@ export const actions = {
     }
   },
   async getCategories(context) {
-    const res = (await this.$axios.get('http://localhost:8000/getCategories'))
-      .data
+    const res = (await this.$axios.get('/getCategories')).data
     if (res.Data == null && res.ErrorCode != 200) {
       return new Promise((resolve, reject) => {
         reject({

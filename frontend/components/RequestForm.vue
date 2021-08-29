@@ -158,7 +158,7 @@ export default {
       this.request.Categories = this.selectedCategories
 
 
-      let res = await this.$axios.post("http://localhost:8000/requestService", this.request)
+      let res = await this.$axios.post("/requestService", this.request)
 
 
       this.error.error = {

@@ -15,6 +15,7 @@ func HandleRequests() {
 	r := mux.NewRouter()
 	r.HandleFunc("/getCategories", GetterCategories)
 	r.HandleFunc("/getServices", GetterServices)
+	r.HandleFunc("/requestService", HandleServiceRequest)
 	http.Handle("/", r)
 
 	c := cors.New(cors.Options{

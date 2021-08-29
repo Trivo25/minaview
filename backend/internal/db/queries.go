@@ -3,7 +3,58 @@ package db
 import (
 	"context"
 	"errors"
+	"fmt"
+	"github.com/trivo25/mina-view/backend/internal/util"
+	"time"
 )
+
+func InsertService(service Service) error {
+	conn, err := GetCon()
+	if err != nil {
+		return errors.New("An Error has occured")
+	}
+	defer conn.Close()
+	service.ServiceInserted = int(time.Now().Unix())
+	serviceString := service.ServiceName + time.Now().String()
+	service.ServiceHash = util.GetHashOfService(serviceString)
+
+	sqlStatement := `
+			INSERT INTO services (service_name, logo_link, website_link, description, creator, hash, contact, inserted, accepted, islive)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, false, false);`
+	_, err = conn.Exec(context.Background(), sqlStatement,
+		&service.ServiceName,
+		&service.ServiceLogo,
+		&service.ServiceWebsite,
+		&service.ServiceDescription,
+		&service.ServiceCreator,
+		&service.ServiceHash,
+		&service.ServiceContact,
+		&service.ServiceInserted,
+	)
+	if err != nil {
+		return errors.New("An Error has occured")
+	}
+
+	var id int
+	err = conn.QueryRow(context.Background(), "SELECT service_id FROM services WHERE hash = $1", service.ServiceHash).Scan(&id)
+	/*	defer rows.Close()
+		if err != nil {
+			return errors.New("An Error has occured")
+		}
+		var id int
+		for rows.Next() {
+			fmt.Println(rows.Scan())
+			err = rows.Scan(&id)
+		}*/
+	fmt.Println(service.ServiceHash)
+	fmt.Println(id)
+
+	return nil
+}
+
+func InsertCategory() {
+
+}
 
 func QueryCategories() ([]Category, error) {
 
@@ -53,7 +104,7 @@ func QueryServices() ([]Service, error) {
 	defer conn.Close()
 	services := []Service{}
 	rows, err := conn.Query(context.Background(),
-		"SELECT services.service_id, services.service_name, services.logo_link, services.website_link, services.description, services.hash, services.inserted, services.creator FROM services WHERE islive = true;")
+		"SELECT services.service_id, services.service_name, services.logo_link, services.website_link, services.description, services.hash, services.inserted, services.creator, services.contact FROM services WHERE islive = true;")
 	defer rows.Close()
 
 	if err != nil {
@@ -61,7 +112,7 @@ func QueryServices() ([]Service, error) {
 	}
 	for rows.Next() {
 		s := Service{}
-		err := rows.Scan(&s.ServiceID, &s.ServiceName, &s.ServiceLogo, &s.ServiceWebsite, &s.ServiceDescription, &s.ServiceHash, &s.ServiceInserted, &s.ServiceCreator)
+		err := rows.Scan(&s.ServiceID, &s.ServiceName, &s.ServiceLogo, &s.ServiceWebsite, &s.ServiceDescription, &s.ServiceHash, &s.ServiceInserted, &s.ServiceCreator, &s.ServiceContact)
 		if err != nil {
 			return nil, errors.New("An Error has occured")
 		}

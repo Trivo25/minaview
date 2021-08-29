@@ -12,6 +12,7 @@ CREATE TABLE services (
                           description text DEFAULT '',
                           creator varchar(255) DEFAULT '',
                           hash varchar(255) DEFAULT '',
+                          contact varchar(255) DEFAULT '',
                           inserted bigint,
                           accepted boolean DEFAULT FALSE,
                           islive boolean DEFAULT FALSE,
@@ -23,6 +24,7 @@ CREATE TABLE categories (
                             category_title varchar(255) DEFAULT '',
                             category_key varchar(255) DEFAULT '',
                             category_description text DEFAULT '',
+                            islive boolean DEFAULT false,
                             PRIMARY KEY (category_id)
 );
 

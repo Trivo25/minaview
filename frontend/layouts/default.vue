@@ -33,18 +33,21 @@
       <!-- <span>&copy; {{ new Date().getFullYear() }} - MINAwatch is a community developed project and is not affiliated to Mina Foundation or O(1)Labs. </span>  -->
       <span><a class="made-by" target="_blank" href="https://github.com/Trivo25">Made by Trivo on GitHub </a> <v-icon>mdi-github</v-icon></span>
     </v-footer>
+    <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" />
   </v-app>
 </template>
 
 <script>
 import TagNav from "../components/TagNav.vue"
 import NotificationCard from "../components/NotificationCard.vue"
+import Error from "../components/Error.vue"
 
 export default {
   name: "default",
   components: {
     TagNav,
-    NotificationCard
+    NotificationCard,
+    Error
   },
   data() {
     return {
@@ -56,17 +59,24 @@ export default {
       miniVariant: false,
       title: 'View',
       showInformation: false,
-      isLoading: false
+      isLoading: false,
+      error: {
+        show: false,
+        error: null
+      }
     }
   },
   async mounted() {
     this.isLoading = true
 
     await this.$store.dispatch("getCategories")
-    await this.$store.dispatch("getServices")
+      .then(res => {
+        this.categories = res
+      }, error => {
+        this.error.error = error
+        this.error.show = true
+      })
 
-    this.categories = this.$store.state.categories
-    this.services = this.$store.state.services
 
     this.isLoading = false
 

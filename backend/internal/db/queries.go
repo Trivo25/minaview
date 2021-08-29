@@ -7,8 +7,12 @@ import (
 
 func QueryCategories() ([]Category, error) {
 
-	conn := GetCon()
+	conn, err := GetCon()
+	if err != nil {
+		return nil, errors.New("An Error has occured")
+	}
 	defer conn.Close()
+
 	categories := []Category{}
 	rows, err := conn.Query(context.Background(), "SELECT categories.category_id, categories.category_title, categories.category_description, categories.category_key FROM categories;")
 	defer rows.Close()
@@ -41,7 +45,11 @@ func QueryCategories() ([]Category, error) {
 
 func QueryServices() ([]Service, error) {
 
-	conn := GetCon()
+	conn, err := GetCon()
+
+	if err != nil {
+		return nil, errors.New("An Error has occured")
+	}
 	defer conn.Close()
 	services := []Service{}
 	rows, err := conn.Query(context.Background(),

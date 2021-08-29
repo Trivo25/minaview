@@ -2,22 +2,23 @@ package db
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"github.com/jackc/pgx/v4/pgxpool"
+	"github.com/joho/godotenv"
 	"os"
 )
 
-func GetCon() *pgxpool.Pool {
-	// TODO: edit conn string
-	conn, err := pgxpool.Connect(context.Background(), "postgres://postgres:Florian14@127.0.0.1:5432/minaview_dev")
+func GetCon() (*pgxpool.Pool, error) {
+
+	err := godotenv.Load()
+
 	if err != nil {
-		_, err := fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		if err != nil {
-			return nil
-		}
-		os.Exit(1)
+		return nil, errors.New("An Error has occured")
 	}
-	/*	defer conn.Close(context.Background())
-	 */
-	return conn
+
+	conn, err := pgxpool.Connect(context.Background(), os.Getenv("DATABASE_URL"))
+	if err != nil {
+		return nil, errors.New("An Error has occured")
+	}
+	return conn, nil
 }

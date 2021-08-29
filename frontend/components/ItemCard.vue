@@ -2,20 +2,20 @@
   <div class="card-wrapper">
     <div class="card">
       <div class="card-header">
-        <img class="item-logo" :src="project.logo"/>
+        <img class="item-logo" :src="service.ServiceLogo"/>
       </div>
-      <h1 class="project-title">{{ project.title }}</h1>
+      <h1 class="project-title">{{ service.ServiceName }}</h1>
       <div class="card-content">
-        <p>{{ project.description }}</p>
+        <p>{{ service.ServiceDescription }}</p>
       </div>
       <div class="card-chips">
         <v-chip
-          v-for="(tag, t) in project.tags"
+          v-for="(tag, t) in tags"
           :key="t"
           class="tag-chip"
           outlined
         >
-          <span>{{tag.toUpperCase()}}</span>
+          <span>{{tag.CategoryTitle.toUpperCase()}}</span>
         </v-chip>
       </div>
     </div>
@@ -25,12 +25,24 @@
 <script>
 export default {
   name: "ItemCard",
-  props: ["project"],
+  props: ["service", "categories"],
   data() {
     return {
-
+      tags: []
     }
   },
+  mounted() {
+    // this.$props.categories.forEach(category => {
+    this.$store.state.categories.forEach(category => {
+      this.$props.service.CategoryKeys.forEach(key => {
+        if(category.CategoryKey == key) {
+          this.tags.push(category)
+          // console.log(category)
+        }
+      })
+    })
+  },
+
 }
 </script>
 

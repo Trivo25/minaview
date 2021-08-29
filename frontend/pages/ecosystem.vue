@@ -7,7 +7,7 @@
             v-model="nameSearchMatcher"
             placeholder="Type to search.."
           >
-          
+          {{$store.services}}
           </v-text-field>
           <!-- <span class="sort-option">GitHub Stars
             <v-icon v-if="sortGithubStars" @click="sortGithubStars = !sortGithubStars" color="#a5a5a5">mdi-arrow-up</v-icon>
@@ -27,12 +27,12 @@
       </div>      
     </div>
     <!-- {{parseParams()}} -->
-    <div class="list-wrapper">
+    <div v-if="!isLoading" class="list-wrapper">
       <ul :style="gridStyle" class="card-list">
         <!-- TODO: fix below error -->
-        <template v-for="(item, i) in taggedItems">
+        <template v-for="(item, i) in taggedServices">
           <li :key="i" class="card-item" v-show="searchTitle(item)"> 
-            <ItemCard :project="item" />
+            <ItemCard :categories="categories" :service="item" />
           </li>
         </template>
         <div class="not-found" v-show="noMatches()">
@@ -41,81 +41,34 @@
         </div>
       </ul>
     </div>
+    <div v-else>
+      <Loader/>
+    </div>
   </div>
 </template>
 
 <script>
 import ItemCard from "../components/ItemCard.vue"
+import Loader from "../components/Loader.vue"
 
 export default {
   name: "Ecosystem",
   props: [],
+  components: {
+    ItemCard,
+    Loader
+  },
   data () {
     return {
       sortDownloads: false,
       sortLikes: false,
       sortGithubStars: false,
       nameSearchMatcher: "",
-      items: [
-        {
-          title: "Clorio",
-          logo: "https://clor.io/assets/ClorioLogo.svg",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus atque placeat et dicta, odio maiores error modi blanditiis, qui sequi asperiores magnam dolorem nihil eveniet quod consequatur, illum odit eaque.", 
-          tags: ["Wallet", "Staking Pool"],
-          keys: ["wallets", "staking-pools"],
-          link: ""
-        },
-        {
-          title: "MINA",
-          logo: "https://minaprotocol.com/wp-content/themes/minaprotocol/img/mina-wordmark-light.svg",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus atque placeat et dicta, odio maiores error modi blanditiis, qui sequi asperiores magnam dolorem nihil eveniet quod consequatur, illum odit eaque.", 
-          tags: ["Explorer", "Staking Pool", "Monitoring and Dashboard"],
-          keys: ["explorers", "staking-pools", "monitoring-and-dashboards"],
-          link: ""
-        },
-        {
-          title: "Auro",
-          logo: "https://www.aurowallet.com/wp-content/uploads/2021/04/icon-128.png",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus atque placeat et dicta, odio maiores error modi blanditiis, qui sequi asperiores magnam dolorem nihil eveniet quod consequatur, illum odit eaque.", 
-          tags: ["Wallet", "Staking Pool"],
-          keys: ["wallets", "staking-pools"],
-          link: ""
-        },
-        {
-          title: "MinaExplorer",
-          logo: "https://minaexplorer.com/static/global_assets/images/mina-explorer-image.png",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus atque placeat et dicta, odio maiores error modi blanditiis, qui sequi asperiores magnam dolorem nihil eveniet quod consequatur, illum odit eaque.", 
-          tags: ["Explorer", "Staking Pool"],
-          keys: ["explorers", "staking-pools"],
-          link: ""
-        },
-        {
-          title: "TowerStake",
-          logo: "https://towerstake.com/wp-content/uploads/2021/04/TowerStake_logo_blanc_WEB.png",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus atque placeat et dicta, odio maiores error modi blanditiis, qui sequi asperiores magnam dolorem nihil eveniet quod consequatur, illum odit eaque.", 
-          tags: ["Explorer", "Staking Pool", "Monitoring and Dashboard"],
-          keys: ["explorers", "staking-pools", "monitoring-and-dashboards"],
-          link: ""
-        },
-        {
-          title: "Piconbello",
-          logo: "https://mina.piconbello.com/static/logo-f4ceae98580bca2536ac9e6749f5c3c5.png",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus atque placeat et dicta, odio maiores error modi blanditiis, qui sequi asperiores magnam dolorem nihil eveniet quod consequatur, illum odit eaque.", 
-          tags: ["Staking Pool"],
-          keys: ["staking-pools"],
-          link: ""
-        },
-        {
-          title: "MinaExplorer",
-          logo: "https://minaexplorer.com/static/global_assets/images/mina-explorer-image.png",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus atque placeat et dicta, odio maiores error modi blanditiis, qui sequi asperiores magnam dolorem nihil eveniet quod consequatur, illum odit eaque.", 
-          tags: ["Explorer", "Staking Pool"],
-          keys: ["explorers", "staking-pools"],
-          link: ""
-        },
-      ],
+      services: [],
+      categories: [],
       numberOfColumns: 3,
-      noResultsByTag: false
+      noResultsByTag: false,
+      isLoading: false
     }
   },
   methods: {
@@ -123,10 +76,10 @@ export default {
       this.cards.push('new-card')
     },
     noMatches() {
-      return !this.items.find(x => x.title.toLowerCase().includes(this.nameSearchMatcher.toLowerCase())) || this.noResultsByTag
+      return !this.services.find(x => x.ServiceName.toLowerCase().includes(this.nameSearchMatcher.toLowerCase())) || this.noResultsByTag
     },
     searchTitle(item) {
-      return item.title.toLowerCase().includes(this.nameSearchMatcher.toLowerCase())
+      return item.ServiceName.toLowerCase().includes(this.nameSearchMatcher.toLowerCase())
     },
     parseParams() {
       let categories = this.$route.query.categories
@@ -143,19 +96,30 @@ export default {
     // parseParams() {
     //   return this.$route.query.categories.split(',');
     // },
-    taggedItems() {
+    taggedServices() {
       //return this.parseParams()[0] == ""  ? this.items : this.items.filter(x => JSON.stringify(x.keys) == JSON.stringify(this.parseParams()))
-      let arr = this.parseParams()[0] == "" ? this.items : this.items.filter(x => this.parseParams().every(r => x.keys.includes(r)))
+      let arr = this.parseParams()[0] == "" ? this.services : this.services.filter(x => this.parseParams().every(r => x.CategoryKeys.includes(r)))
       if(arr.length == 0) this.noResultsByTag = true
       else this.noResultsByTag = false
       return arr
     }
   },
+  async created()  {
+
+    this.isLoading = true
+
+    await this.$store.dispatch("getServices")
+    await this.$store.dispatch("getCategories")
+    this.services = await this.$store.state.services
+    this.categories = await this.$store.state.categories
+
+    this.isLoading = false
+  }
 }
 </script>
 
 
-<style >
+<style scoped>
 
 .not-found {
   display: flex;
@@ -228,6 +192,7 @@ export default {
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(3, 1fr);
 }
+
 
 ul {
   list-style-type: none;

@@ -13,7 +13,8 @@ type Service struct {
 	ServiceHash     string
 	ServiceInserted int
 	ServiceCreator  string
-	Categories      []Category
+	//Categories      []Category
+	CategoryKeys []string
 }
 
 // defines the structure of the category fields
@@ -22,4 +23,5 @@ type Category struct {
 	CategoryTitle       string
 	CategoryDescription string
 	CategoryKey         string
+	ServiceCount        int
 }

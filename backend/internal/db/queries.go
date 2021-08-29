@@ -8,6 +8,7 @@ import (
 func QueryCategories() ([]Category, error) {
 
 	conn := GetCon()
+	defer conn.Close()
 	categories := []Category{}
 	rows, err := conn.Query(context.Background(), "SELECT categories.category_id, categories.category_title, categories.category_description, categories.category_key FROM categories;")
 	defer rows.Close()
@@ -17,6 +18,13 @@ func QueryCategories() ([]Category, error) {
 	for rows.Next() {
 		c := Category{}
 		err = rows.Scan(&c.CategoryID, &c.CategoryTitle, &c.CategoryDescription, &c.CategoryKey)
+		if err != nil {
+			return nil, errors.New("An Error has occured")
+		}
+
+		err = conn.QueryRow(context.Background(),
+			"SELECT COUNT(id) FROM services_categories WHERE category_id = $1;", c.CategoryID).Scan(&c.ServiceCount)
+
 		if err != nil {
 			return nil, errors.New("An Error has occured")
 		}
@@ -32,7 +40,9 @@ func QueryCategories() ([]Category, error) {
 }
 
 func QueryServices() ([]Service, error) {
+
 	conn := GetCon()
+	defer conn.Close()
 	services := []Service{}
 	rows, err := conn.Query(context.Background(),
 		"SELECT services.service_id, services.service_name, services.logo_link, services.website_link, services.description, services.hash, services.inserted, services.creator FROM services WHERE islive = true;")
@@ -47,23 +57,23 @@ func QueryServices() ([]Service, error) {
 		if err != nil {
 			return nil, errors.New("An Error has occured")
 		}
-		catRows, err := conn.Query(context.Background(), "SELECT categories.category_id, categories.category_title, categories.category_description, categories.category_key FROM categories INNER JOIN services_categories ON services_categories.category_id = categories.category_id WHERE service_id = $1;", s.ServiceID)
+		catRows, err := conn.Query(context.Background(), "SELECT categories.category_key FROM categories INNER JOIN services_categories ON services_categories.category_id = categories.category_id WHERE service_id = $1;", s.ServiceID)
 
 		if err != nil {
 			return nil, errors.New("An Error has occured")
 		}
-		categories := []Category{}
+		categories := []string{}
 		for catRows.Next() {
-			c := Category{}
-			err = catRows.Scan(&c.CategoryID, &c.CategoryTitle, &c.CategoryDescription, &c.CategoryKey)
+			key := ""
+			err = catRows.Scan(&key)
 
 			if err != nil {
 				return nil, errors.New("An Error has occured")
 			}
-			categories = append(categories, c)
+			categories = append(categories, key)
 
 		}
-		s.Categories = categories
+		s.CategoryKeys = categories
 		services = append(services, s)
 	}
 

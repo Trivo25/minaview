@@ -43,7 +43,7 @@
       <!-- <span>&copy; {{ new Date().getFullYear() }} - MINAwatch is a community developed project and is not affiliated to Mina Foundation or O(1)Labs. </span>  -->
       <span><a class="made-by" target="_blank" href="https://github.com/Trivo25">Made by Trivo on GitHub </a> <v-icon>mdi-github</v-icon></span>
     </v-footer>
-    <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" />
+    <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" :type="error.type" />
   </v-app>
 </template>
 
@@ -72,7 +72,8 @@ export default {
       isLoading: false,
       error: {
         show: false,
-        error: null
+        error: null,
+        type: "error"
       }
     }
   },
@@ -84,7 +85,9 @@ export default {
         this.categories = res
       }, error => {
         this.error.error = error
+        this.error.type == "error"
         this.error.show = true
+        
       })
 
 

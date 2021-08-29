@@ -44,7 +44,7 @@
     <div v-else>
       <Loader/>
     </div>
-    <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" />
+    <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" :type="error.type"/>
   </div>
 </template>
 
@@ -72,7 +72,8 @@ export default {
       isLoading: false,
       error: {
         error: null,
-        show: false
+        show: false,
+        type:"error"
       }
     }
   },
@@ -119,6 +120,7 @@ export default {
       }, error => {
         this.error.error = error
         this.error.show = true
+        this.error.type = "error"
       })
     await this.$store.dispatch("getCategories")
       .then(res => {
@@ -126,6 +128,7 @@ export default {
       }, error => {
         this.error.error = error
         this.error.show = true
+        this.error.type = "error"
       })
     // this.$store.dispatch("getCategories")
     // this.services = await this.$store.state.services

@@ -20,7 +20,8 @@
 
 <script>
 export default {
-  name:"NotificationCard"
+  name:"NotificationCard",
+  props: ["type"]
 }
 </script>
 
@@ -46,6 +47,12 @@ export default {
   justify-items: center;
   animation: floatIn 1s forwards;
   cursor: default;
+}
+
+
+
+.theme--light .notification-card {
+  text-shadow: none;
 }
 
 @keyframes floatIn {

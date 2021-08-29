@@ -6,16 +6,18 @@
       placeholder="e.g. Wallets"
     />
     <v-row>
+      <Loader v-if="isLoading"/>
       <v-chip
         router
         exact
         label
+        :to="allChip.to"
         class="chip-item"
         :class="{'chip-active' : allChip.isActive }"
         @click="clearSelection()"
       >
         <span class="category-title">{{ allChip.CategoryTitle.toUpperCase() }}</span>
-        <span class="category-total">({{ allChip.ServiceCount ? allChip.ServiceCount : 0 }})</span>
+        <span class="category-total all">({{ totalServices ? totalServices : 0 }})</span>
       </v-chip>
     </v-row>
     <v-row
@@ -23,7 +25,7 @@
       :key="i"
     >
       <v-chip
-        :to="routeParams"
+        :to="routeParams()"
         router
         exact
         label
@@ -40,9 +42,15 @@
 </template>
 
 <script>
+import Loader from "./Loader.vue"
+
+
 export default {
   name: "TagNav",
-  props: [],
+  props: ["categories", "isLoading"],
+  components: {
+    Loader
+  },
   data() {
     return {
       searchCategoryFilter: "",
@@ -53,7 +61,7 @@ export default {
           CategoryTitle: 'All',
           to: '/ecosystem',
           ServiceCount: 0,
-          isActive: true
+          isActive: false
         },
       categories: [
       ],
@@ -69,8 +77,9 @@ export default {
         this.params.push(item.CategoryKey); item.isActive = !item.isActive;
 
       this.allChip.isActive = false;
+
       this.$router.push({
-        path: this.parsedTargetPath
+        path: this.routeParams()
       })
     },
     clearSelection() {
@@ -80,26 +89,28 @@ export default {
         item.isActive = false
       })
     },
-  },
-  computed: {
     routeParams() {
       let paramString = ""
       this.params.forEach((param, i) => {
         paramString += (i == 0 ? '' :  ",") + param
       })
       let parsedTargetPath = `${this.targetRoute}${paramString}`
-      this.$router.push({
-        path: parsedTargetPath
-      })
+      this.parsedTargetPath = parsedTargetPath
+      // this.$router.push({
+      //   path: parsedTargetPath
+      // })
       return parsedTargetPath
     }
   },
+  computed: {
+    totalServices() {
+      return this.$store.state.services.length
+    }
+  },
   async mounted() {
-    await this.$store.dispatch("getCategories")
-    this.categories = await this.$store.state.categories
+    this.categories = this.$props.categories//await this.$store.state.categories
     this.categories.forEach(cat => {
       cat.isActive = false
-      this.allChip.ServiceCount += cat.ServiceCount
     })
   },
 }
@@ -155,5 +166,11 @@ export default {
   font-weight: 300;
   margin-left: 2px;
 }
+
+.all {
+  font-weight: 400 !important;
+  color: rgb(172, 172, 172);
+}
+
 
 </style>

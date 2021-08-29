@@ -7,7 +7,7 @@
       fixed
       app
     >
-    <TagNav/>
+    <TagNav :isLoading="isLoading" :categories="categories"/>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon color="#6a00ff" @click.stop="drawer = !drawer" />
@@ -51,86 +51,24 @@ export default {
       clipped: true,
       drawer: true,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          iconColor: "#5442f5",
-          title: 'All',
-          to: '/',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#7542f5",
-          title: 'Official Resources',
-          to: '/official-resources',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#8d42f5",
-          title: 'Wallets',
-          to: '/wallets',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#a442f5",
-          title: 'Explorers',
-          to: '/explorers',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#b642f5",
-          title: 'Tools',
-          to: '/tools',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#8d42f5",
-          title: 'Staking Pools',
-          to: '/staking-pools',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#d442f5",
-          title: 'Monitoring and Dashboards',
-          to: '/monitoring-und-dashboards',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#f542ef",
-          title: 'Ledger Apps',
-          to: '/ledger',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#f5426f",
-          title: 'News, Resources and Articles',
-          to: '/news-articles',
-          total: 5
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          iconColor: "#f54242",
-          title: 'International Communities',
-          to: '/communities',
-          total: 5
-        },
-      ],
+      categories: [],
+      services: [],
       miniVariant: false,
       title: 'View',
-      showInformation: false
+      showInformation: false,
+      isLoading: false
     }
   },
   async mounted() {
-    // await this.$store.dispatch("getCategories")
-    // await this.$store.dispatch("getServices")
+    this.isLoading = true
+
+    await this.$store.dispatch("getCategories")
+    await this.$store.dispatch("getServices")
+
+    this.categories = this.$store.state.categories
+    this.services = this.$store.state.services
+
+    this.isLoading = false
 
     setTimeout(() => {
       this.showInformation = true
@@ -189,6 +127,7 @@ export default {
 
 .mina-logo {
   height: 100%;
+  cursor: pointer;
 }
 
 .add-service-button {

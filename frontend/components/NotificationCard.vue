@@ -5,7 +5,7 @@
       </div>
      <div class="content">
        <div class="left">
-          <a style="font-size: 2rem;">&#128526;</a>
+          <a style="font-size: 2rem; cursor: default;">&#128526;</a>
        </div>
 
        <div class="right">
@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .notification-card {
   position: absolute;
   display: inline;
@@ -33,7 +33,7 @@ export default {
   top: 10px;
   width: 350px;
   height: 80px;
-  border-radius: 15px;
+  border-radius: 5px;
   border: 1px solid rgba(6, 44, 241, 0.46);
   background-color: rgba(7, 73, 149, 0.12156862745098039);
   box-shadow: 0px 0px 2px #0396ff;
@@ -45,6 +45,7 @@ export default {
   margin-bottom: 0;
   justify-items: center;
   animation: floatIn 1s forwards;
+  cursor: default;
 }
 
 @keyframes floatIn {

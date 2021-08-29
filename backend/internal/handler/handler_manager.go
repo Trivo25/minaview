@@ -11,6 +11,7 @@ import (
 func HandleRequests() {
 
 	// http.HandleFunc("/getCategories", GetterCategories)
+
 	r := mux.NewRouter()
 	r.HandleFunc("/getCategories", GetterCategories)
 	r.HandleFunc("/getServices", GetterServices)

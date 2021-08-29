@@ -27,7 +27,7 @@
       </div>      
     </div>
     <!-- {{parseParams()}} -->
-    <div class="list-wrapper">
+    <div v-if="!isLoading" class="list-wrapper">
       <ul :style="gridStyle" class="card-list">
         <!-- TODO: fix below error -->
         <template v-for="(item, i) in taggedServices">
@@ -41,15 +41,23 @@
         </div>
       </ul>
     </div>
+    <div v-else>
+      <Loader/>
+    </div>
   </div>
 </template>
 
 <script>
 import ItemCard from "../components/ItemCard.vue"
+import Loader from "../components/Loader.vue"
 
 export default {
   name: "Ecosystem",
   props: [],
+  components: {
+    ItemCard,
+    Loader
+  },
   data () {
     return {
       sortDownloads: false,
@@ -59,7 +67,8 @@ export default {
       services: [],
       categories: [],
       numberOfColumns: 3,
-      noResultsByTag: false
+      noResultsByTag: false,
+      isLoading: false
     }
   },
   methods: {
@@ -95,17 +104,22 @@ export default {
       return arr
     }
   },
-  async mounted()  {
+  async created()  {
+
+    this.isLoading = true
+
     await this.$store.dispatch("getServices")
     await this.$store.dispatch("getCategories")
     this.services = await this.$store.state.services
     this.categories = await this.$store.state.categories
+
+    this.isLoading = false
   }
 }
 </script>
 
 
-<style >
+<style scoped>
 
 .not-found {
   display: flex;
@@ -178,6 +192,7 @@ export default {
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(3, 1fr);
 }
+
 
 ul {
   list-style-type: none;

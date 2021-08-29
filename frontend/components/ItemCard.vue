@@ -32,10 +32,12 @@ export default {
     }
   },
   mounted() {
-    this.$props.categories.forEach(category => {
+    // this.$props.categories.forEach(category => {
+    this.$store.state.categories.forEach(category => {
       this.$props.service.CategoryKeys.forEach(key => {
         if(category.CategoryKey == key) {
           this.tags.push(category)
+          // console.log(category)
         }
       })
     })

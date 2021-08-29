@@ -2,7 +2,7 @@ package db
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/joho/godotenv"
 	"os"
@@ -13,16 +13,12 @@ func GetCon() (*pgxpool.Pool, error) {
 	err := godotenv.Load()
 
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		return nil, err
+		return nil, errors.New("An Error has occured")
 	}
 
 	conn, err := pgxpool.Connect(context.Background(), os.Getenv("DATABASE_URL"))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		return nil, err
+		return nil, errors.New("An Error has occured")
 	}
-	/*	defer conn.Close(context.Background())
-	 */
 	return conn, nil
 }

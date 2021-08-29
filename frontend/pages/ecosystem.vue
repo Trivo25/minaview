@@ -44,6 +44,7 @@
     <div v-else>
       <Loader/>
     </div>
+    <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" />
   </div>
 </template>
 
@@ -68,7 +69,11 @@ export default {
       categories: [],
       numberOfColumns: 3,
       noResultsByTag: false,
-      isLoading: false
+      isLoading: false,
+      error: {
+        error: null,
+        show: false
+      }
     }
   },
   methods: {
@@ -104,14 +109,27 @@ export default {
       return arr
     }
   },
-  async created()  {
+  async mounted()  {
 
     this.isLoading = true
 
     await this.$store.dispatch("getServices")
+      .then(res => {
+        this.services = res
+      }, error => {
+        this.error.error = error
+        this.error.show = true
+      })
     await this.$store.dispatch("getCategories")
-    this.services = await this.$store.state.services
-    this.categories = await this.$store.state.categories
+      .then(res => {
+        this.categories = res
+      }, error => {
+        this.error.error = error
+        this.error.show = true
+      })
+    // this.$store.dispatch("getCategories")
+    // this.services = await this.$store.state.services
+    // this.categories = await this.$store.state.categories
 
     this.isLoading = false
   }

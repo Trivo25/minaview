@@ -19,21 +19,37 @@ export const mutations = {
 
 export const actions = {
   async getServices(context) {
-    try {
-      const res = (await this.$axios.get('http://localhost:8000/getServices'))
-        .data
+    const res = (await this.$axios.get('http://localhost:8000/getServices'))
+      .data
+    if (res.Data == null && res.ErrorCode != 200) {
+      return new Promise((resolve, reject) => {
+        reject({
+          Error: res.Error,
+          Code: res.ErrorCode,
+        })
+      })
+    } else {
       context.commit('setServices', res.Data)
-    } catch (error) {
-      console.log(error)
+      return new Promise((resolve, reject) => {
+        resolve(res.Data)
+      })
     }
   },
   async getCategories(context) {
-    try {
-      const res = (await this.$axios.get('http://localhost:8000/getCategories'))
-        .data
+    const res = (await this.$axios.get('http://localhost:8000/getCategories'))
+      .data
+    if (res.Data == null && res.ErrorCode != 200) {
+      return new Promise((resolve, reject) => {
+        reject({
+          Error: res.Error,
+          Code: res.ErrorCode,
+        })
+      })
+    } else {
       context.commit('setCategories', res.Data)
-    } catch (error) {
-      console.log(error)
+      return new Promise((resolve, reject) => {
+        resolve(res.Data)
+      })
     }
   },
 }

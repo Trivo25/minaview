@@ -14,8 +14,8 @@
         :class="{'chip-active' : allChip.isActive }"
         @click="clearSelection()"
       >
-        <span class="category-title">{{ allChip.title.toUpperCase() }}</span>
-        <span class="category-total">({{ allChip.total }})</span>
+        <span class="category-title">{{ allChip.CategoryTitle.toUpperCase() }}</span>
+        <span class="category-total">({{ allChip.ServiceCount ? allChip.ServiceCount : 0 }})</span>
       </v-chip>
     </v-row>
     <v-row
@@ -50,9 +50,9 @@ export default {
       parsedTargetPath: "",
       params: [],
       allChip: {
-          title: 'All',
+          CategoryTitle: 'All',
           to: '/ecosystem',
-          total: 5,
+          ServiceCount: 0,
           isActive: true
         },
       categories: [
@@ -99,6 +99,7 @@ export default {
     this.categories = await this.$store.state.categories
     this.categories.forEach(cat => {
       cat.isActive = false
+      this.allChip.ServiceCount += cat.ServiceCount
     })
   },
 }

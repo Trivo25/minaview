@@ -21,6 +21,13 @@ func QueryCategories() ([]Category, error) {
 			return nil, errors.New("An Error has occured")
 		}
 
+		err = conn.QueryRow(context.Background(),
+			"SELECT COUNT(id) FROM services_categories WHERE category_id = $1;", c.CategoryID).Scan(&c.ServiceCount)
+
+		if err != nil {
+			return nil, errors.New("An Error has occured")
+		}
+
 		categories = append(categories, c)
 	}
 

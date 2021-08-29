@@ -23,4 +23,5 @@ type Category struct {
 	CategoryTitle       string
 	CategoryDescription string
 	CategoryKey         string
+	ServiceCount        int
 }

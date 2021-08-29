@@ -1,5 +1,5 @@
 <template>
-  <div class="card-wrapper">
+  <div @click="handleClick()" class="card-wrapper">
     <div class="card">
       <div class="card-header">
         <img class="item-logo" :src="service.ServiceLogo"/>
@@ -31,6 +31,12 @@ export default {
       tags: []
     }
   },
+  methods: {
+    async handleClick() {
+      let res = await this.$axios.post("http://localhost:8000/hitService", this.$props.service)
+      window.open(this.$props.service.ServiceWebsite, '_blank').focus();
+    }
+  },
   mounted() {
     // this.$props.categories.forEach(category => {
     this.$store.state.categories.forEach(category => {
@@ -50,6 +56,7 @@ export default {
 
 .card-wrapper {
   border-radius: 10px;
+  width: 100%;
   text-align: center;
   max-height: auto;
 }

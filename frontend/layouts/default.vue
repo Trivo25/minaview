@@ -121,11 +121,12 @@ export default {
     rgb(32, 58, 67),
     rgb(44, 83, 100)
   ) !important;
+    transition: background-color 2s ease !important;
 }
 
 .theme--light.v-app-bar, .theme--light.v-application {
-  /* background: linear-gradient(148deg, rgba(5,0,255,0.44629521730567223) 0%, rgba(0,167,255,1) 50%, rgba(202,255,234,0.7708918539325843) 100%) !important; */
-  background-color: white !important;
+  background: white !important;
+  transition: background-color 2s ease !important;
 }
 
 

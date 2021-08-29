@@ -142,6 +142,7 @@ export default {
 
 <style scoped>
 
+
 .not-found {
   display: flex;
   text-align: center !important;

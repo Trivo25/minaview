@@ -1,21 +1,21 @@
 <template>
-  <div class="card-wrapper">
+  <div @click="handleClick()" class="card-wrapper">
     <div class="card">
       <div class="card-header">
-        <img class="item-logo" :src="project.logo"/>
+        <img class="item-logo" :src="service.ServiceLogo"/>
       </div>
-      <h1 class="project-title">{{ project.title }}</h1>
+      <h1 class="project-title">{{ service.ServiceName }}</h1>
       <div class="card-content">
-        {{ project.description }}
+        <p>{{ service.ServiceDescription }}</p>
       </div>
       <div class="card-chips">
         <v-chip
-          v-for="(tag, t) in project.tags"
+          v-for="(tag, t) in tags"
           :key="t"
           class="tag-chip"
           outlined
         >
-          <span>{{tag.toUpperCase()}}</span>
+          <span>{{tag.CategoryTitle.toUpperCase()}}</span>
         </v-chip>
       </div>
     </div>
@@ -25,12 +25,30 @@
 <script>
 export default {
   name: "ItemCard",
-  props: ["project"],
+  props: ["service", "categories"],
   data() {
     return {
-
+      tags: []
     }
   },
+  methods: {
+    async handleClick() {
+      let res = await this.$axios.post("http://localhost:8000/hitService", this.$props.service)
+      window.open(this.$props.service.ServiceWebsite, '_blank').focus();
+    }
+  },
+  mounted() {
+    // this.$props.categories.forEach(category => {
+    this.$store.state.categories.forEach(category => {
+      this.$props.service.CategoryKeys.forEach(key => {
+        if(category.CategoryKey == key) {
+          this.tags.push(category)
+          // console.log(category)
+        }
+      })
+    })
+  },
+
 }
 </script>
 
@@ -38,6 +56,7 @@ export default {
 
 .card-wrapper {
   border-radius: 10px;
+  width: 100%;
   text-align: center;
   max-height: auto;
 }
@@ -51,8 +70,13 @@ export default {
 }
 
 .project-title {
-  font-weight: 500;
+  margin-top: 15px;
+  font-weight: 600;
   color: grey;
+}
+
+.theme--light .project-title {
+  color: black;
 }
 
 .card { 
@@ -62,7 +86,12 @@ export default {
   width: auto;
   max-height: 100%;
   cursor: pointer;
-  animation: hoverCardIn 1s forwards;
+  animation: hoverCardIn .5s forwards;
+}
+
+.theme--light .card {
+  background-color: rgb(238, 238, 238);
+  border: 2px black solid;
 }
 
 .card-chips {
@@ -70,7 +99,12 @@ export default {
 }
 
 .card:hover {
-  animation: hoverCardOut 1s forwards;
+  animation: hoverCardOut .5s forwards;
+  background-color: #202020;
+}
+
+.theme--light .card:hover {
+  background-color: rgb(223, 223, 223);
 }
 
 @keyframes hoverCardOut {
@@ -78,13 +112,13 @@ export default {
     transform: scale(1.0)
   }
   100% {
-    transform: scale(1.05)
+    transform: scale(1.03)
   }
 }
 
 @keyframes hoverCardIn {
   0% {
-    transform: scale(1.05)
+    transform: scale(1.03)
   }
   100% {
     transform: scale(1.0)
@@ -99,4 +133,12 @@ export default {
   margin: 2px;
 }
 
+
+.theme--light .tag-chip {
+  color: rgba(255, 115, 0, 1);
+}
+
+.card-content p {
+  font-family: "Roboto"
+}
 </style>

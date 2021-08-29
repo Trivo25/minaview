@@ -1,0 +1,3 @@
+backend/.idea
+backend/.env
+backend/cmd/mina-view/.env

@@ -128,7 +128,10 @@ export default {
       showInformation: false
     }
   },
-  mounted() {
+  async mounted() {
+    // await this.$store.dispatch("getCategories")
+    // await this.$store.dispatch("getServices")
+
     setTimeout(() => {
       this.showInformation = true
     }, 8000)

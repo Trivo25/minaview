@@ -19,7 +19,7 @@
       </v-chip>
     </v-row>
     <v-row
-      v-for="(item, i) in items"
+      v-for="(item, i) in categories"
       :key="i"
     >
       <v-chip
@@ -32,8 +32,8 @@
         :class="{'chip-active' : item.isActive }"
         @click="changeSelection(item)"
       >
-        <span class="category-title">{{ item.title.toUpperCase() }}</span>
-        <span class="category-total">({{ item.total }})</span>
+        <span class="category-title">{{ item.CategoryTitle.toUpperCase() }}</span>
+        <span class="category-total">({{ item.ServiceCount ? item.ServiceCount : 0 }})</span>
       </v-chip>
     </v-row>
   </div>
@@ -55,72 +55,18 @@ export default {
           total: 5,
           isActive: true
         },
-      items: [
-        {
-          title: 'Official Resources',
-          param: 'official-resources',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'Wallets',
-          param: 'wallets',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'Explorers',
-          param: 'explorers',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'Tools',
-          param: 'tools',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'Staking Pools',
-          param: 'staking-pools',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'Monitoring and Dashboards',
-          param: 'monitoring-and-dashboards',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'Ledger Apps',
-          param: 'ledger',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'News, Resources and Articles',
-          param: 'news-articles',
-          total: 5,
-          isActive: false
-        },
-        {
-          title: 'International Communities',
-          param: 'communities',
-          total: 5,
-          isActive: false
-        },
+      categories: [
       ],
     }
   },
   methods: {
     filterCategories(item) {
-      return ((item.title).toLowerCase()).includes((this.searchCategoryFilter).toLowerCase())
+      return item.CategoryTitle.toLowerCase().includes((this.searchCategoryFilter).toLowerCase())
     },
     changeSelection(item) {
-      this.params.includes(item.param) && item.isActive ?
-        this.params.splice(this.params.indexOf(item.param), 1) :
-        this.params.push(item.param); item.isActive = !item.isActive;
+      this.params.includes(item.CategoryKey) && item.isActive ?
+        this.params.splice(this.params.indexOf(item.CategoryKey), 1) :
+        this.params.push(item.CategoryKey); item.isActive = !item.isActive;
 
       this.allChip.isActive = false;
       this.$router.push({
@@ -130,10 +76,10 @@ export default {
     clearSelection() {
       this.allChip.isActive = true
       this.params = new Array()
-      this.items.forEach(item => {
+      this.categories.forEach(item => {
         item.isActive = false
       })
-    }
+    },
   },
   computed: {
     routeParams() {
@@ -147,7 +93,14 @@ export default {
       })
       return parsedTargetPath
     }
-  }
+  },
+  async mounted() {
+    await this.$store.dispatch("getCategories")
+    this.categories = await this.$store.state.categories
+    this.categories.forEach(cat => {
+      cat.isActive = false
+    })
+  },
 }
 </script>
 

@@ -4,10 +4,11 @@
       height="70%"
     >
 
-
+    <h1 style="color: red; font-weight: 300;">For changes or new services please follow <a href="https://github.com/Trivo25/mina-view/issues/6">this link </a></h1>
       <v-row>
         <v-col cols=6>
           <v-text-field
+            class="text-field"
             v-model="request.ServiceName"
             placeholder="Service Name"
             :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
@@ -15,6 +16,7 @@
         </v-col>
         <v-col cols=6>
           <v-text-field
+            class="text-field"
             v-model="request.ServiceWebsite"
             placeholder="Website, GitHub, .."
             :rules="[(v => (v || '' ).length <= 150 || 'Description can not be greater than 150 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
@@ -24,6 +26,7 @@
       <v-row>
         <v-col cols=6>
           <v-text-field
+            class="text-field"
             v-model="request.ServiceCreator"
             placeholder="Creator (Group, Person, ..)"
             :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
@@ -31,6 +34,8 @@
         </v-col>
         <v-col cols=6>
           <v-textarea
+            class="text-field"
+
             v-model="request.ServiceDescription"
             placeholder="Description of what your Service does!"
             :rules="[(v => (v || '' ).length <= 250 || 'Description can not be greater than 250 characters'), v => (v || '' ).length >= 80 || 'Description can not be less than 80 characters']"
@@ -40,15 +45,66 @@
       <v-row>
         <v-col cols=6>
           <v-text-field
+            class="text-field"
             v-model="request.ServiceLogo"
             placeholder="Link to SVG or PNG Logo"
             :rules="[(v => (v || '' ).length <= 150 || 'Description can not be greater than 150 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
           />
         </v-col>
-        <v-col cols=6>
+        <!-- discord, telegram, email, slack, reddit, github -->
+        <v-col cols=3>
           <v-text-field
-            v-model="request.ServiceContact"
-            placeholder="Contact (E-Mail, Discord, Slack, ..)"
+            class="text-field"
+            v-model="request.Twitter"
+            placeholder="Twitter - e.g MinaProtocol"
+            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+          />
+        </v-col>
+        <v-col cols=3>
+          <v-text-field
+            class="text-field"
+            v-model="request.Discord"
+            placeholder="Discord - e.g discord.gg/myCoolInvite"
+            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+          />
+        </v-col>
+        <v-col cols=3>
+          <v-text-field
+            class="text-field"
+            v-model="request.Telegram"
+            placeholder="Telegram - e.g MyGroupName"
+            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+          />
+        </v-col>
+        <v-col cols=3>
+          <v-text-field
+            class="text-field"
+            v-model="request.Email"
+            placeholder="Email - e.g funnyMail@smile.com"
+            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+          />
+        </v-col>
+        <v-col cols=3>
+          <v-text-field
+            class="text-field"
+            v-model="request.Slack"
+            placeholder="Slack"
+            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+          />
+        </v-col>
+        <v-col cols=3>
+          <v-text-field
+            class="text-field"
+            v-model="request.Reddit"
+            placeholder="Reddit - e.g /r/minaprotocol or /u/Trivo_"
+            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+          />
+        </v-col>
+        <v-col cols=3>
+          <v-text-field
+            class="text-field"
+            v-model="request.Github"
+            placeholder="Github - e.g Trivo25"
             :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
           />
         </v-col>
@@ -90,6 +146,7 @@
       <v-row>
         <v-col cols=6>
           <v-text-field
+            class="text-field"
             v-model="request.NewCategory"
             placeholder="No category fits your need? Request a new one!"
           />
@@ -231,4 +288,10 @@ export default {
 .theme--light .tag-chip {
   color: rgba(255, 115, 0, 1);
 }
+
+.theme--light .text-field {
+  color: black !important;
+  font-weight: 500 !important;
+}
+
 </style>

@@ -136,6 +136,7 @@ export default {
   font-size: 0.8rem !important;
 }
 
+
 .chip-item:hover, .v-chip:hover {
   background-color: rgb(106, 0, 255) !important;
   color: none !important;

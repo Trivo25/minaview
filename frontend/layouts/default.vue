@@ -15,6 +15,16 @@
       <h1 class="title">{{ title }}</h1>
       <v-spacer />
       <v-btn
+        icon
+        @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+      >
+        <v-icon
+          :color=" $vuetify.theme.dark ? 'yellow' : 'black'"
+        >
+          mdi-theme-light-dark
+        </v-icon>
+      </v-btn>
+      <v-btn
         outlined
         plain
         to="/request"
@@ -101,7 +111,7 @@ export default {
   box-shadow: none !important;
 }
 
-.theme--dark.v-app-bar {
+.theme--dark.v-app-bar, .theme--dark.v-application {
   background: linear-gradient(
     to right,
     rgb(15, 32, 39),
@@ -110,20 +120,11 @@ export default {
   ) !important;
 }
 
-.theme--light.v-app-bar {
-  background: rgb(5,0,255);
-  background: linear-gradient(148deg, rgba(5,0,255,0.44629521730567223) 0%, rgba(0,167,255,1) 50%, rgba(202,255,234,0.7708918539325843) 100%);
+.theme--light.v-app-bar, .theme--light.v-application {
+  /* background: linear-gradient(148deg, rgba(5,0,255,0.44629521730567223) 0%, rgba(0,167,255,1) 50%, rgba(202,255,234,0.7708918539325843) 100%) !important; */
+  background-color: white !important;
 }
 
-.theme--dark.v-application {
-  background: #0f2027;
-  background: linear-gradient(
-    to right,
-    rgb(15, 32, 39),
-    rgb(32, 58, 67),
-    rgb(44, 83, 100)
-  ) !important; 
-}
 
 .v-footer {
   backdrop-filter: blur(10px);
@@ -133,6 +134,11 @@ export default {
 .title {
   font-weight: 100;
   color: grey;
+}
+
+.theme--light .title {
+  font-weight: 300;
+  color: black;
 }
 
 .mina-logo {

@@ -39,10 +39,10 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-footer fixed=true app>
+    <!-- <v-footer fixed=false app>
       <!-- <span>&copy; {{ new Date().getFullYear() }} - MINAwatch is a community developed project and is not affiliated to Mina Foundation or O(1)Labs. </span>  -->
       <span><a class="made-by" target="_blank" href="https://github.com/Trivo25">Made by Trivo on GitHub </a> <v-icon>mdi-github</v-icon></span>
-    </v-footer>
+    </v-footer> -->
     <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" :type="error.type" />
   </v-app>
 </template>
@@ -109,24 +109,30 @@ export default {
 .v-app-bar, .v-navigation-drawer, .v-list, .v-list-item, .v-footer {
   box-shadow: none !important;
   border-bottom: none !important;
-  background: #00000000;
+  background: #00000000 !important;
   border: none !important;
   box-shadow: none !important;
 }
 
-.theme--dark.v-app-bar, .theme--dark.v-application {
+.v-footer {
+  bottom: 0px !important;
+}
+
+.theme--dark.v-application {
   background: linear-gradient(
     to right,
     rgb(15, 32, 39),
     rgb(32, 58, 67),
     rgb(44, 83, 100)
   ) !important;
-    transition: background-color 2s ease !important;
 }
 
 .theme--light.v-app-bar, .theme--light.v-application {
-  background: white !important;
-  transition: background-color 2s ease !important;
+  background: rgba(255, 255, 255, 0) !important;
+}
+
+.theme--dark.v-app-bar {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 

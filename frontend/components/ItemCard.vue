@@ -2,9 +2,19 @@
   <div @click="handleClick()" class="card-wrapper">
     <div class="card">
       <div class="card-header">
-        <img class="item-logo" :src="service.ServiceLogo"/>
+        <img v-if="service.ServiceLogo != ''" class="item-logo" :src="service.ServiceLogo"/>
+        <img v-else class="item-logo" src="../assets/placeholder.svg"/>
+        
       </div>
       <h1 class="project-title">{{ service.ServiceName }}</h1>
+       <div class="socials">
+        <v-btn @click="goTo(service.Github)" v-if="service.Github != ''" icon><v-icon class="social" color="#F05032">mdi-git</v-icon></v-btn>
+        <v-btn @click="goTo(service.Telegram)" v-if="service.Telegram != ''" icon><v-icon class="social" color="#26A5E4">mdi-telegram</v-icon></v-btn>
+        <v-btn @click="goTo(service.Reddit)" v-if="service.Reddit != ''" icon><v-icon class="social" color="#FF4500">mdi-reddit</v-icon></v-btn>
+        <v-btn @click="goTo(service.Discord)" v-if="service.Discord != ''" icon><v-icon class="social" color="#5865F2">mdi-discord</v-icon></v-btn>
+        <v-btn @click="goTo(service.Slack)" v-if="service.Slack != ''" icon><v-icon class="social" color="#4A154B">mdi-slack</v-icon></v-btn>
+        <v-btn @click="goTo(service.Twitter)" v-if="service.Twitter != ''" icon><v-icon class="social" color="#1DA1F2">mdi-twitter</v-icon></v-btn>
+      </div>
       <div class="card-content">
         <p>{{ service.ServiceDescription }}</p>
       </div>
@@ -35,6 +45,9 @@ export default {
     async handleClick() {
       let res = await this.$axios.post("http://localhost:8000/hitService", this.$props.service)
       window.open(this.$props.service.ServiceWebsite, '_blank').focus();
+    },
+    goTo(url) {
+      window.open(url, '_blank').focus();
     }
   },
   mounted() {
@@ -53,6 +66,43 @@ export default {
 </script>
 
 <style scoped>
+
+.socials {
+  align-items: center;
+  margin: 5px;
+
+}
+
+.socials .v-icon {
+  margin: 5px;
+}
+
+.social {
+  animation: scaleOut 0.5s forwards;
+}
+
+.social:hover {
+  cursor: pointer;
+  animation: scaleIn 0.5s forwards;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes scaleOut {
+  0% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}
 
 .card-wrapper {
   border-radius: 10px;

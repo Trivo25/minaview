@@ -38,7 +38,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios'],
   axios: {
-    baseURL: DEV ? 'http://localhost:8000' : 'https://api.minaview.com',
+    baseURL: DEV ? 'http://localhost:8000' : 'https://api.technotro.com',
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

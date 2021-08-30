@@ -14,7 +14,7 @@
       <img class="mina-logo" src="../assets/mina_logo_large.svg"/>
       <h1 class="title">{{ title }}</h1>
       <v-spacer />
-      <v-btn
+      <!-- <v-btn
         icon
         @click="$vuetify.theme.dark = !$vuetify.theme.dark"
       >
@@ -23,7 +23,7 @@
         >
           mdi-theme-light-dark
         </v-icon>
-      </v-btn>
+      </v-btn> -->
       <v-btn
         outlined
         plain
@@ -40,7 +40,7 @@
       </v-container>
     </v-main>
     <!-- <v-footer fixed=false app>
-      <!-- <span>&copy; {{ new Date().getFullYear() }} - MINAwatch is a community developed project and is not affiliated to Mina Foundation or O(1)Labs. </span>  -->
+      <span>&copy; {{ new Date().getFullYear() }} - MINAwatch is a community developed project and is not affiliated to Mina Foundation or O(1)Labs. </span>
       <span><a class="made-by" target="_blank" href="https://github.com/Trivo25">Made by Trivo on GitHub </a> <v-icon>mdi-github</v-icon></span>
     </v-footer> -->
     <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" :type="error.type" />
@@ -158,7 +158,7 @@ export default {
 
 .add-service-button {
   background: rgb(91,0,255);
-  background: linear-gradient(148deg, rgba(91,0,255,0.44629521730567223) 0%, rgba(156,0,255,1) 50%, rgba(153, 255, 214, 0.771) 100%);
+  background: linear-gradient(148deg, rgba(91,0,255,0.44629521730567223) 0%, rgb(135, 1, 218) 50%, rgb(187, 79, 255) 100%);
   color: rgb(255, 255, 255);
   padding: 10px;
   border: 1px solid black;

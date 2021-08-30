@@ -44,10 +44,10 @@ export default {
   methods: {
     async handleClick() {
       let res = await this.$axios.post("/hitService", this.$props.service)
-      window.open(this.$props.service.ServiceWebsite, '_blank').focus();
+      window.open(this.$props.service.ServiceWebsite, '_blank')
     },
     goTo(url) {
-      window.open(url, '_blank').focus();
+      window.open(url, '_blank')
     }
   },
   mounted() {
@@ -106,10 +106,9 @@ export default {
 
 .card-wrapper {
   border-radius: 10px;
-  width: 100%;
   text-align: center;
   max-height: auto;
-  max-width: 100%;
+  max-width: auto;
 }
 
 .item-logo {
@@ -145,6 +144,7 @@ export default {
     rgb(32, 58, 67),
     rgb(44, 83, 100)
   ) !important; */
+    margin-top: 5px;
   background-color: rgb(17, 44, 56);
   border-radius: 15px;
   border: solid 1px rgb(80, 80, 80);

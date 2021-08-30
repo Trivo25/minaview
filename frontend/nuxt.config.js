@@ -33,10 +33,11 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/axios',
+    'vue-masonry-css',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', 'vue-masonry-css'],
   axios: {
     baseURL: DEV ? 'http://localhost:8000' : 'https://api.technotro.com',
   },

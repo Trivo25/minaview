@@ -23,6 +23,7 @@
     "eslint-config-prettier": "^8.3.0",
     "jest": "^27.0.5",
     "prettier": "^2.3.2",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.4",
+    "vue-masonry-css": "^1.0.3"
   }
 }

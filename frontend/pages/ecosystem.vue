@@ -27,20 +27,13 @@
       </div>      
     </div>
     <!-- {{parseParams()}} -->
-    <div v-if="!isLoading" class="list-wrapper">
-      <ul :style="gridStyle" class="card-list">
-        <!-- TODO: fix below error -->
-        <template v-for="(item, i) in taggedServices">
-          <li :key="i" class="card-item" v-show="searchTitle(item)"> 
-            <ItemCard :categories="categories" :service="item" />
-          </li>
-        </template>
-        <div class="not-found" v-show="noMatches()">
+            
+    <div class="not-found" v-show="noMatches()">
           <h1>This service seems to be from another planet..</h1>
           <img class="not-found" src="../assets/not_from_this_world.svg"/>
-
-        </div>
-      </ul>
+    </div>
+    <div v-if="!isLoading" class="card-list">
+      <ItemCard v-for="(item, i) in taggedServices" :key="i" class="card-item" v-show="searchTitle(item)" :categories="categories" :service="item" />
     </div>
     <div v-else>
       <Loader/>
@@ -53,12 +46,13 @@
 import ItemCard from "../components/ItemCard.vue"
 import Loader from "../components/Loader.vue"
 
+
 export default {
   name: "Ecosystem",
   props: [],
   components: {
     ItemCard,
-    Loader
+    Loader,
   },
   data () {
     return {
@@ -144,7 +138,25 @@ export default {
 <style scoped>
 
 
+.card-item {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 10px;
+  break-inside: avoid;
+  width: 100%;
+  z-index: 5;
+}
+
+
+.card-list {
+  margin-top: 35px;
+  column-count: 3;
+  column-gap: 15px;
+}
+
 .not-found {
+  margin-top: 15px;
   display: flex;
   text-align: center !important;
   justify-content: center;
@@ -203,17 +215,6 @@ export default {
   position: relative;
   width: 100%;
   /* left: 50%; */
-}
-
-.card-list {
-  height: auto;
-  position: relative;
-  display: grid;
-  margin-top: 50px;
-  grid-auto-flow: dense;
-  grid-gap: 1em;
-  grid-template-columns: repeat(3, auto);
-  grid-template-rows: repeat(3, 1fr);
 }
 
 

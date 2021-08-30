@@ -1,9 +1,19 @@
 <template>
   <div @click="handleClick()" class="card-wrapper">
     <div class="card">
+      <div v-if="service.Github != null && service.Github != ''" class="stats">
+
+        <v-icon>mdi-star</v-icon>
+        <span>{{service.GithubStars}}</span>
+
+        <v-icon>mdi-source-branch</v-icon>
+        <span>{{service.GithubForks}}</span>
+        
+      </div>
       <div class="card-header">
         <img v-if="service.ServiceLogo != ''" class="item-logo" :src="service.ServiceLogo"/>
-        <img v-else class="item-logo" src="../assets/placeholder.svg"/>
+        <!-- <img v-else class="item-logo" src="../assets/placeholder.svg"/> -->
+        <!-- might add a placeholder later -->
         
       </div>
       <h1 class="project-title">{{ service.ServiceName }}</h1>
@@ -66,6 +76,23 @@ export default {
 </script>
 
 <style scoped>
+
+.stats {
+  float: right;
+  align-content: right;
+  text-align: right;
+  justify-content: right;
+  margin-left: 5px;
+  width: 100%;
+}
+
+.stats .v-icon {
+  color: rgb(100, 100, 100);
+}
+
+.stats span {
+  color: grey;
+}
 
 .socials {
   align-items: center;

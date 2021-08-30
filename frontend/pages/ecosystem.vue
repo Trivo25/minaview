@@ -148,7 +148,6 @@ export default {
   z-index: 5;
 }
 
-
 .card-list {
   margin-top: 35px;
   column-count: 3;
@@ -234,4 +233,9 @@ ul {
   }
 }
 
+@media only screen and (max-width: 1273px) {
+  .card-list {
+    column-count: 1 !important;
+  }
+}
 </style>

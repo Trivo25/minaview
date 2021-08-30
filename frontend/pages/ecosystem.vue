@@ -37,7 +37,8 @@
         </template>
         <div class="not-found" v-show="noMatches()">
           <h1>This service seems to be from another planet..</h1>
-          <img src="../assets/not_from_this_world.svg"/>
+          <img class="not-found" src="../assets/not_from_this_world.svg"/>
+
         </div>
       </ul>
     </div>
@@ -219,4 +220,17 @@ export default {
 ul {
   list-style-type: none;
 }
+
+@keyframes flying {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: 50px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
 </style>

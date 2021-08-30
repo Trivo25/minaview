@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
+let DEV = process.env.NODE_ENV !== 'production'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -36,7 +38,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios'],
   axios: {
-    // proxy: true
+    baseURL: DEV ? 'http://localhost:8000' : 'https://api.minaview.com',
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

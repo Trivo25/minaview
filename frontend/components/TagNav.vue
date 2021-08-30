@@ -134,6 +134,47 @@ export default {
   width: auto !important;
   margin-right: 5px !important;
   font-size: 0.8rem !important;
+  border: solid 1px rgba(128, 128, 128, 0.5);
+}
+
+.theme--light .chip-item {
+  background-color: rgb(243, 243, 243) !important;
+  padding: 10px !important;
+  margin: 5px !important;
+  width: auto !important;
+  margin-right: 5px !important;
+  color:  rgb(0, 0, 0) !important;
+  width: auto !important;
+  margin-right: 5px !important;
+  font-size: 0.8rem !important;
+  border: solid 1px rgba(0, 0, 0, 0.5);
+}
+
+/* background: linear-gradient(148deg, rgba(91,0,255,0.44629521730567223) 0%, rgba(156,0,255,1) 50%, rgba(153, 255, 214, 0.771) 100%); */
+.theme--light .category-title {
+  color: rgb(0, 0, 0);
+  font-weight: 400;
+}
+
+.theme--light .category-total {
+  color: rgb(75, 75, 75);
+  font-weight: 300;
+  margin-left: 2px;
+}
+
+.theme--light .chip-item:hover, .theme--light .v-chip:hover {
+  background-color: rgba(87, 179, 200, 0.324) !important;
+  color: none !important;
+}
+
+.theme--light .v-chip--active {
+  background-color: rgb(243, 243, 243) !important;
+  color:  rgb(39, 39, 39) !important;
+}
+
+.theme--light .chip-active {
+  background-color: rgba(156,0,255,0.5) !important;
+  color: white;
 }
 
 

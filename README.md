@@ -1,4 +1,4 @@
-<img src="./repo-pic.png" style="width: 300px" align="right" />
+<img src="./repo-pic.png" style="width: 200px" align="right" />
 
 # Minaview ![GitHub issues](https://img.shields.io/github/issues/trivo25/mina-view?style=flat-square)![GitHub pull requests](https://img.shields.io/github/issues-pr/trivo25/mina-view?style=flat-square)
 

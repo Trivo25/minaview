@@ -1,14 +1,24 @@
 <template>
   <div @click="handleClick()" class="card-wrapper">
     <div class="card">
+      <div v-if="service.Github != null && service.Github != ''" class="stats">
+
+        <v-icon>mdi-star</v-icon>
+        <span>{{service.GithubStars}}</span>
+
+        <v-icon>mdi-source-branch</v-icon>
+        <span>{{service.GithubForks}}</span>
+        
+      </div>
       <div class="card-header">
         <img v-if="service.ServiceLogo != ''" class="item-logo" :src="service.ServiceLogo"/>
-        <img v-else class="item-logo" src="../assets/placeholder.svg"/>
+        <!-- <img v-else class="item-logo" src="../assets/placeholder.svg"/> -->
+        <!-- might add a placeholder later -->
         
       </div>
       <h1 class="project-title">{{ service.ServiceName }}</h1>
        <div class="socials">
-        <v-btn @click="goTo(service.Github)" v-if="service.Github != ''" icon><v-icon class="social" color="#F05032">mdi-git</v-icon></v-btn>
+        <v-btn @click="goTo(service.Github)" v-if="service.Github != ''" icon><v-icon class="social" color="#4078c0">mdi-github</v-icon></v-btn>
         <v-btn @click="goTo(service.Telegram)" v-if="service.Telegram != ''" icon><v-icon class="social" color="#26A5E4">mdi-telegram</v-icon></v-btn>
         <v-btn @click="goTo(service.Reddit)" v-if="service.Reddit != ''" icon><v-icon class="social" color="#FF4500">mdi-reddit</v-icon></v-btn>
         <v-btn @click="goTo(service.Discord)" v-if="service.Discord != ''" icon><v-icon class="social" color="#5865F2">mdi-discord</v-icon></v-btn>
@@ -43,11 +53,11 @@ export default {
   },
   methods: {
     async handleClick() {
-      let res = await this.$axios.post("http://localhost:8000/hitService", this.$props.service)
-      window.open(this.$props.service.ServiceWebsite, '_blank').focus();
+      let res = await this.$axios.post("/hitService", this.$props.service)
+      window.open(this.$props.service.ServiceWebsite, '_blank')
     },
     goTo(url) {
-      window.open(url, '_blank').focus();
+      window.open(url, '_blank')
     }
   },
   mounted() {
@@ -66,6 +76,23 @@ export default {
 </script>
 
 <style scoped>
+
+.stats {
+  float: right;
+  align-content: right;
+  text-align: right;
+  justify-content: right;
+  margin-left: 5px;
+  width: 100%;
+}
+
+.stats .v-icon {
+  color: rgb(100, 100, 100);
+}
+
+.stats span {
+  color: grey;
+}
 
 .socials {
   align-items: center;
@@ -106,32 +133,48 @@ export default {
 
 .card-wrapper {
   border-radius: 10px;
-  width: 100%;
   text-align: center;
   max-height: auto;
+  max-width: auto;
 }
 
 .item-logo {
-  max-height: 150px;
-  width: auto;
-  max-width: 100%;
+  display: inline;
   height: auto;
+  width: auto;
+  max-height: 150px;
+  max-width: 300px;
   padding: 15px;
 }
 
 .project-title {
   margin-top: 15px;
-  font-weight: 600;
-  color: grey;
+  font-weight: 400;
+  font-family: "Roboto";
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 2px black;
 }
 
-.theme--light .project-title {
+
+
+
+.theme--light .project-title, .theme--light .card-content p {
+  font-weight: 500;
   color: black;
+  text-shadow: none;
 }
 
 .card { 
-  background-color: #171717;
+    /* background: linear-gradient(
+    to right,
+    rgb(15, 32, 39),
+    rgb(32, 58, 67),
+    rgb(44, 83, 100)
+  ) !important; */
+    margin-top: 5px;
+  background-color: rgb(17, 44, 56);
   border-radius: 15px;
+  border: solid 1px rgb(80, 80, 80);
   padding: 15px;
   width: auto;
   max-height: 100%;
@@ -150,7 +193,7 @@ export default {
 
 .card:hover {
   animation: hoverCardOut .5s forwards;
-  background-color: #202020;
+  background-color: rgb(16, 56, 73);
 }
 
 .theme--light .card:hover {
@@ -178,7 +221,7 @@ export default {
 .tag-chip {
   font-weight: 500;
   font-size: 12px;
-  color: rgba(255, 115, 0, 0.4);
+  color: rgba(255, 115, 0, 0.696);
   border-color: rgb(85, 85, 85);
   margin: 2px;
 }
@@ -189,6 +232,8 @@ export default {
 }
 
 .card-content p {
-  font-family: "Roboto"
+  font-family: "Roboto";
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 1px black;
 }
 </style>

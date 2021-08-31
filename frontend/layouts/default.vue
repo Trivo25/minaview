@@ -8,6 +8,11 @@
       app
     >
     <TagNav :isLoading="isLoading" :categories="categories"/>
+    <v-spacer></v-spacer>
+    <div class="socials">
+      <span>Made by Trivo on <a href="https://www.github.com/trivo25/mina-view" class="mdi mdi-github"></a></span>
+      <!-- <span>Please leave feedback your <a href="https://www.github.com/trivo25/mina-view/issues" class="mdi mdi-github">here</a>!</span> -->
+    </div>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon color="#6a00ff" @click.stop="drawer = !drawer" />
@@ -105,6 +110,35 @@ export default {
 * {
   font-family: "Roboto";
 }  
+
+.socials {
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: 0 !important;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 50px;
+}
+
+.socials span {
+  color: grey;
+  font-weight: 300;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 50px;
+}
+
+.socials a:active {
+  text-decoration: none;
+}
+
+.socials a:link {
+  text-decoration: none;
+}
+
 
 .v-app-bar, .v-navigation-drawer, .v-list, .v-list-item, .v-footer {
   box-shadow: none !important;

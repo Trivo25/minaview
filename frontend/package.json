@@ -10,6 +10,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxt/builder": "2.15.8",
+    "@nuxt/webpack": "2.15.8",
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
@@ -24,6 +26,7 @@
     "jest": "^27.0.5",
     "prettier": "^2.3.2",
     "vue-jest": "^3.0.4",
-    "vue-masonry-css": "^1.0.3"
+    "vue-masonry-css": "^1.0.3",
+    "webpack": "^4.46.0"
   }
 }

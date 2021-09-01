@@ -1,5 +1,10 @@
 <template>
-  <div id="chartdiv">
+  <div>
+    <!-- <div class="legend">
+      <h1>Nodes: <span>{{peerCount}}</span></h1>
+    </div> -->
+    <div id="chartdiv">
+    </div>
   </div>
 </template>
 
@@ -9,7 +14,7 @@ export default {
   name:"PeerMap",
   data() {
     return {
-
+      peerCount : 0
     }
   },
   methods: {
@@ -19,8 +24,8 @@ export default {
   },
   async mounted() {
 
-    const res = (await this.$axios.get("/getPeers")).data.Data
-
+    const peers = (await this.$axios.get("/getPeers")).data.Data
+    this.peerCount = peers.length
     let {am4core, am4charts, am4maps, am4geodata_worldLow} = this.$am4core();
     am4core.ready(() => {
 
@@ -41,7 +46,7 @@ export default {
       var imageSeries = chart.series.push(new am4maps.MapImageSeries());
       imageSeries.mapImages.template.propertyFields.longitude = "longitude";
       imageSeries.mapImages.template.propertyFields.latitude = "latitude";
-      imageSeries.data = res
+      imageSeries.data = peers
       chart.events.on( "ready", updateCustomMarkers );
       chart.events.on( "mappositionchanged", updateCustomMarkers );
 
@@ -94,17 +99,33 @@ export default {
 }
 </script>
 <style>
-  
+
+/* .wrapper {
+  width: 100%;
+}
+   */
 #chartdiv {
-  width: auto;
-  height: 500px !important;
-  margin: 15px;
+  width: 100% !important;
+  height: 600px !important;
   overflow: hidden;
   position: relative;
   border-radius: 15px;
   border: 1px solid grey
 }
 
+.legend {
+  position: relative;
+  z-index: 500;
+  left: -40%;
+  bottom: -60px;
+  color: rgb(75, 75, 75);  
+}
+
+
+.legend h1 {
+  font-family: "Roboto";
+  font-weight: 300;
+}
 
 .map-marker {
   margin-left: -8px;

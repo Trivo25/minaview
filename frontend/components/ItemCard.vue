@@ -2,12 +2,38 @@
   <div @click="handleClick()" class="card-wrapper">
     <div class="card">
       <div v-if="service.Github != null && service.Github != ''" class="stats">
+        <div class="left">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+              color="green"
+              v-bind="attrs"
+              v-on="on"
+              v-if="service.Verified"
+              >mdi-shield-check</v-icon>
+              </template>
+            <span>This project has been verified to be a legitimate service.</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+              color="green"
+              v-bind="attrs"
+              v-on="on"
+              v-if="service.Audited"
+              @click="goTo(service.Audit)"
+              >mdi-shield-lock</v-icon>
+              </template>
+            <span>This project has been audited by a security firm. Check details for more information.</span>
+          </v-tooltip>
+        </div>
+        <div class="right"> 
+          <v-icon>mdi-star</v-icon>
+          <span>{{service.GithubStars}}</span>
 
-        <v-icon>mdi-star</v-icon>
-        <span>{{service.GithubStars}}</span>
-
-        <v-icon>mdi-source-branch</v-icon>
-        <span>{{service.GithubForks}}</span>
+          <v-icon>mdi-source-branch</v-icon>
+          <span>{{service.GithubForks}}</span>
+        </div>
         
       </div>
       <div class="card-header">
@@ -84,6 +110,22 @@ export default {
   justify-content: right;
   margin-left: 5px;
   width: 100%;
+}
+
+.left {
+  float: left;
+  align-content: left;
+  text-align: left;
+  justify-content: left;
+  width: 50%;
+}
+
+.right {
+  float: right;
+  align-content: right;
+  text-align: right;
+  justify-content: right;
+  width: 50%;
 }
 
 .stats .v-icon {

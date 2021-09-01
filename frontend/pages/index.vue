@@ -1,31 +1,33 @@
 <template>
   <div class="index">
     <!-- <TrendingCard /> -->
-    <!-- <img src="../assets/mina_logo_large.svg"/>
-    <h1>The world's lightest blockchain, powered by participants.</h1>
-    <h3>MINAview offers an overview of the fast-growing ecosystem.</h3>
-    <v-btn
-      class="explore-button bn"
-      outlined
-      x-large
-      to="/ecosystem"
-      elevation="24"
-    >
-      <span>Explore the Ecosystem</span>
-    </v-btn> -->
-    <PeerMap />
+    <div class="header">
+      <img src="../assets/mina_logo_large.svg"/>
+      <h1>The world's lightest blockchain, powered by participants.</h1>
+      <h3>MINAview offers an overview of the fast-growing ecosystem.</h3>
+      <v-btn
+        class="explore-button bn"
+        outlined
+        large
+        to="/ecosystem"
+        elevation="24"
+      >
+        <span>Explore the Ecosystem</span>
+      </v-btn>
+    </div>
+    <!-- <PeerMap style="height: 500px; margin-top: 15px;"/> -->
   </div>
 </template>
 
 <script>
 import TrendingCard from "../components/TrendingCard.vue"
-import PeerMap from "../components/PeerMap.vue"
+// import PeerMap from "../components/PeerMap.vue"
 
 export default {
   name: "index",
   props: [],
   components: {
-    PeerMap
+    // PeerMap
   },
   data () {
     return {
@@ -41,6 +43,15 @@ export default {
 
 
 <style scoped>
+
+.header {
+  margin-top: 0px;
+}
+
+.header img {
+  height: 100px;
+}
+
 .bn {
   padding: 0.6em 2em;
   border: none;
@@ -122,12 +133,20 @@ export default {
   text-align: center;
   width: 100%;
   height: 100% !important; 
-  
+
 
 }
 
 .theme--light h1, .theme--light h3 {
   color: black;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.1rem;
 }
 
 h1, h3 {

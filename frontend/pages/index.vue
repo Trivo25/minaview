@@ -13,15 +13,20 @@
     >
       <span>Explore the Ecosystem</span>
     </v-btn>
-
+    <PeerMap />
   </div>
 </template>
 
 <script>
 import TrendingCard from "../components/TrendingCard.vue"
+import PeerMap from "../components/PeerMap.vue"
+
 export default {
   name: "index",
   props: [],
+  components: {
+    PeerMap
+  },
   data () {
     return {
 

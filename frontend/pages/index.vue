@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <!-- <TrendingCard /> -->
-    <img src="../assets/mina_logo_large.svg"/>
+    <!-- <img src="../assets/mina_logo_large.svg"/>
     <h1>The world's lightest blockchain, powered by participants.</h1>
     <h3>MINAview offers an overview of the fast-growing ecosystem.</h3>
     <v-btn
@@ -12,7 +12,7 @@
       elevation="24"
     >
       <span>Explore the Ecosystem</span>
-    </v-btn>
+    </v-btn> -->
     <PeerMap />
   </div>
 </template>
@@ -120,6 +120,10 @@ export default {
 .index {
   justify-content: center;
   text-align: center;
+  width: 100%;
+  height: 100% !important; 
+  
+
 }
 
 .theme--light h1, .theme--light h3 {

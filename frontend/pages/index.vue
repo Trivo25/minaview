@@ -15,14 +15,15 @@
         <span>Explore the Ecosystem</span>
       </v-btn>
     </div>
+    <!-- <PriceChart /> -->
     <!-- <PeerMap style="height: 500px; margin-top: 15px;"/> -->
   </div>
 </template>
 
 <script>
-import TrendingCard from "../components/TrendingCard.vue"
+// import TrendingCard from "../components/TrendingCard.vue"
 // import PeerMap from "../components/PeerMap.vue"
-
+// import PriceChart from "../components/PriceChart.vue"
 export default {
   name: "index",
   props: [],

@@ -41,6 +41,13 @@
             :rules="[(v => (v || '' ).length <= 250 || 'Description can not be greater than 250 characters'), v => (v || '' ).length >= 80 || 'Description can not be less than 80 characters']"
           />
         </v-col>
+        <v-col cols=6>
+          <v-text-field
+            class="text-field"
+            v-model="request.Audit"
+            placeholder="Link to your audit"
+          />
+        </v-col>
       </v-row>
       <v-row>
         <v-col cols=6>

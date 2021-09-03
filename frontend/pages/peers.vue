@@ -11,7 +11,7 @@ export default {
   name: "peers",
   props: [],
   components: {
-    PeerMap
+    // PeerMap
   },
 }
 </script>

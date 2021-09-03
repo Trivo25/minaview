@@ -1,7 +1,7 @@
 <template>
   <div @click="handleClick()" class="card-wrapper">
     <div class="card">
-      <div v-if="service.Github != null && service.Github != ''" class="stats">
+      <div class="stats">
         <div class="left">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
@@ -27,7 +27,7 @@
             <span>This project has been audited by a security firm. Click for more information.</span>
           </v-tooltip>
         </div>
-        <div class="right"> 
+        <div v-if="service.Github != null && service.Github != ''" class="right"> 
           <v-icon>mdi-star</v-icon>
           <span>{{service.GithubStars}}</span>
 

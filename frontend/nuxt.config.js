@@ -45,8 +45,27 @@ export default {
     'vue-masonry-css',
   ],
 
+  publicRuntimeConfig: {
+    recaptcha: {
+      /* reCAPTCHA options */
+      // hideBadge: Boolean, // Hide badge element (v3 & v2 via size=invisible)
+      // language: String,   // Recaptcha language (v2)
+      version: 3,
+      siteKey: '6LeIakEcAAAAALiVrDKecxEtXLzyN7OQRbCQRKuO', //process.env.RECAPTCHA_SITE_KEY // for example
+    },
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', 'vue-masonry-css'],
+  modules: ['@nuxtjs/axios', 'vue-masonry-css', '@nuxtjs/recaptcha'],
+
+  // recaptcha: {
+  //   hideBadge: Boolean, // Hide badge element (v3 & v2 via size=invisible)
+  //   language: String, // Recaptcha language (v2)
+  //   siteKey: String, // Site key for requests
+  //   version: Number, // Version
+  //   size: String, // Size: 'compact', 'normal', 'invisible' (v2)
+  // },
+
   axios: {
     baseURL: DEV ? 'http://localhost:8000' : 'https://api.technotro.com',
   },

@@ -204,7 +204,7 @@ export default {
     async onSubmit() {
       try {
         const token = await this.$recaptcha.execute('login')
-        console.log('ReCaptcha token:', token)
+        // console.log('ReCaptcha token:', token)
 
         this.request.Categories = this.selectedCategories
         this.request.Code = token

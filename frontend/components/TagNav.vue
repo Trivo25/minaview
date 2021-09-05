@@ -54,12 +54,12 @@ export default {
   data() {
     return {
       searchCategoryFilter: "",
-      targetRoute: "/ecosystem?categories=",
+      targetRoute: "/ecosystem/?categories=",
       parsedTargetPath: "",
       params: [],
       allChip: {
           CategoryTitle: 'All',
-          to: '/ecosystem',
+          to: '/ecosystem/',
           ServiceCount: 0,
           isActive: false
         },

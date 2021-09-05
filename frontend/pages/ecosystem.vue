@@ -7,7 +7,7 @@
             v-model="nameSearchMatcher"
             placeholder="Type to search.."
           >
-          {{$store.services}}
+          <!-- {{$store.services}} -->
           </v-text-field>
           <!-- <span class="sort-option">GitHub Stars
             <v-icon v-if="sortGithubStars" @click="sortGithubStars = !sortGithubStars" color="#a5a5a5">mdi-arrow-up</v-icon>

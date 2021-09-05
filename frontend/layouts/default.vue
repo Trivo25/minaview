@@ -105,7 +105,7 @@ export default {
 
     setTimeout(() => {
       this.showInformation = true
-    }, 8000)
+    }, 10000)
   },
 }
 </script>

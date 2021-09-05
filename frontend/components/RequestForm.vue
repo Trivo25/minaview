@@ -3,169 +3,178 @@
     <div
       height="70%"
     >
+    <form @submit.prevent="onSubmit">
+      <h1 style="color: red; font-weight: 300;">For changes or new services please follow <a href="https://github.com/Trivo25/mina-view/issues/6">this link </a></h1>
+        <v-row>
+          <v-col cols=6>
+            <v-text-field
+              class="text-field"
+              v-model="request.ServiceName"
+              placeholder="Service Name"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=6>
+            <v-text-field
+              class="text-field"
+              v-model="request.ServiceWebsite"
+              placeholder="Website, GitHub, .."
+              :rules="[(v => (v || '' ).length <= 150 || 'Description can not be greater than 150 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols=6>
+            <v-text-field
+              class="text-field"
+              v-model="request.ServiceCreator"
+              placeholder="Creator (Group, Person, ..)"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=6>
+            <v-textarea
+              class="text-field"
 
-    <h1 style="color: red; font-weight: 300;">For changes or new services please follow <a href="https://github.com/Trivo25/mina-view/issues/6">this link </a></h1>
-      <v-row>
-        <v-col cols=6>
-          <v-text-field
-            class="text-field"
-            v-model="request.ServiceName"
-            placeholder="Service Name"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=6>
-          <v-text-field
-            class="text-field"
-            v-model="request.ServiceWebsite"
-            placeholder="Website, GitHub, .."
-            :rules="[(v => (v || '' ).length <= 150 || 'Description can not be greater than 150 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols=6>
-          <v-text-field
-            class="text-field"
-            v-model="request.ServiceCreator"
-            placeholder="Creator (Group, Person, ..)"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=6>
-          <v-textarea
-            class="text-field"
+              v-model="request.ServiceDescription"
+              placeholder="Description of what your Service does!"
+              :rules="[(v => (v || '' ).length <= 250 || 'Description can not be greater than 250 characters'), v => (v || '' ).length >= 80 || 'Description can not be less than 80 characters']"
+            />
+          </v-col>
+          <v-col cols=6>
+            <v-text-field
+              class="text-field"
+              v-model="request.Audit"
+              placeholder="Link to your audit"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols=6>
+            <v-text-field
+              class="text-field"
+              v-model="request.ServiceLogo"
+              placeholder="Link to SVG or PNG Logo"
+              :rules="[(v => (v || '' ).length <= 150 || 'Description can not be greater than 150 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <!-- discord, telegram, email, slack, reddit, github -->
+          <v-col cols=3>
+            <v-text-field
+              class="text-field"
+              v-model="request.Twitter"
+              placeholder="Twitter - e.g MinaProtocol"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=3>
+            <v-text-field
+              class="text-field"
+              v-model="request.Discord"
+              placeholder="Discord - e.g discord.gg/myCoolInvite"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=3>
+            <v-text-field
+              class="text-field"
+              v-model="request.Telegram"
+              placeholder="Telegram - e.g MyGroupName"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=3>
+            <v-text-field
+              class="text-field"
+              v-model="request.Email"
+              placeholder="Email - e.g funnyMail@smile.com"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=3>
+            <v-text-field
+              class="text-field"
+              v-model="request.Slack"
+              placeholder="Slack"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=3>
+            <v-text-field
+              class="text-field"
+              v-model="request.Reddit"
+              placeholder="Reddit - e.g /r/minaprotocol or /u/Trivo_"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+          <v-col cols=3>
+            <v-text-field
+              class="text-field"
+              v-model="request.Github"
+              placeholder="Github - e.g Trivo25"
+              :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols=6>
+            <h1 class="cat">Available Categories</h1>
+              <div class="card-chips">
+                <v-chip
+                  v-for="(tag, t) in availableCategories"
+                  :key="t"
+                  class="tag-chip"
+                  outlined
+                  close
+                  close-icon="mdi-plus"
+                  @click:close="addSelected(tag)"
+                >
+                  <span>{{tag.CategoryTitle.toUpperCase()}}</span>
+                </v-chip>
+              </div>  
+          </v-col>
+          <v-col cols=6>
+            <h1 class="cat">Selected Categories</h1>
+              <div class="card-chips">
+                <v-chip
+                  v-for="(tag, t) in selectedCategories"
+                  :key="t"
+                  class="tag-chip"
+                  outlined
+                  close
+                  close-icon="mdi-close-outline"
+                  @click:close="removeSelected(tag)"
+                >
+                  <span>{{tag.CategoryTitle.toUpperCase()}}</span>
+                </v-chip>
+              </div>  
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols=6>
+            <v-text-field
+              class="text-field"
+              v-model="request.NewCategory"
+              placeholder="No category fits your need? Request a new one!"
+            />
+          </v-col>
+        </v-row>
 
-            v-model="request.ServiceDescription"
-            placeholder="Description of what your Service does!"
-            :rules="[(v => (v || '' ).length <= 250 || 'Description can not be greater than 250 characters'), v => (v || '' ).length >= 80 || 'Description can not be less than 80 characters']"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols=6>
-          <v-text-field
-            class="text-field"
-            v-model="request.ServiceLogo"
-            placeholder="Link to SVG or PNG Logo"
-            :rules="[(v => (v || '' ).length <= 150 || 'Description can not be greater than 150 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <!-- discord, telegram, email, slack, reddit, github -->
-        <v-col cols=3>
-          <v-text-field
-            class="text-field"
-            v-model="request.Twitter"
-            placeholder="Twitter - e.g MinaProtocol"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=3>
-          <v-text-field
-            class="text-field"
-            v-model="request.Discord"
-            placeholder="Discord - e.g discord.gg/myCoolInvite"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=3>
-          <v-text-field
-            class="text-field"
-            v-model="request.Telegram"
-            placeholder="Telegram - e.g MyGroupName"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=3>
-          <v-text-field
-            class="text-field"
-            v-model="request.Email"
-            placeholder="Email - e.g funnyMail@smile.com"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=3>
-          <v-text-field
-            class="text-field"
-            v-model="request.Slack"
-            placeholder="Slack"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=3>
-          <v-text-field
-            class="text-field"
-            v-model="request.Reddit"
-            placeholder="Reddit - e.g /r/minaprotocol or /u/Trivo_"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-        <v-col cols=3>
-          <v-text-field
-            class="text-field"
-            v-model="request.Github"
-            placeholder="Github - e.g Trivo25"
-            :rules="[(v => (v || '' ).length <= 50 || 'Description can not be greater than 50 characters'), v => (v || '' ).length >= 4 || 'Description can not be less than 4 characters']"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols=6>
-          <h1 class="cat">Available Categories</h1>
-            <div class="card-chips">
-              <v-chip
-                v-for="(tag, t) in availableCategories"
-                :key="t"
-                class="tag-chip"
-                outlined
-                close
-                close-icon="mdi-plus"
-                @click:close="addSelected(tag)"
-              >
-                <span>{{tag.CategoryTitle.toUpperCase()}}</span>
-              </v-chip>
-            </div>  
-        </v-col>
-        <v-col cols=6>
-          <h1 class="cat">Selected Categories</h1>
-            <div class="card-chips">
-              <v-chip
-                v-for="(tag, t) in selectedCategories"
-                :key="t"
-                class="tag-chip"
-                outlined
-                close
-                close-icon="mdi-close-outline"
-                @click:close="removeSelected(tag)"
-              >
-                <span>{{tag.CategoryTitle.toUpperCase()}}</span>
-              </v-chip>
-            </div>  
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols=6>
-          <v-text-field
-            class="text-field"
-            v-model="request.NewCategory"
-            placeholder="No category fits your need? Request a new one!"
-          />
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col>
-          <v-btn
-          outlined
-          plain
-          @click="submit()"
-          class="service-button"
-          >
-            Wooooooooooosh!
-          </v-btn>
-        </v-col>
-      </v-row>
-    </div>
+        <v-row>
+          <v-col>
+            <v-btn
+            outlined
+            plain
+            
+            class="service-button"
+            type="submit"
+            >
+              Wooooooooooosh!
+            </v-btn>
+          </v-col>
+        </v-row>
+        </form>
+      </div>
     <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" :type="error.type" />
   </div>
 </template>
@@ -192,6 +201,27 @@ export default {
     }
   },
   methods: {
+    async onSubmit() {
+      try {
+        const token = await this.$recaptcha.execute('login')
+        // console.log('ReCaptcha token:', token)
+
+        this.request.Categories = this.selectedCategories
+        this.request.Code = token
+
+        let res = await this.$axios.post("/requestService", this.request)
+
+
+        this.error.error = {
+          Error: "Success! Your request has been submitted",
+          Code: ""
+        }
+        this.error.show = true
+        this.error.type = "success"
+        } catch (error) {
+          console.log('Login error:', error)
+        }
+    },
     removeSelected(tag) {
       // NOTE: weird workaround but the normal methods didnt work for some reason, conflicting with vuex ?
       let temp = []
@@ -210,21 +240,6 @@ export default {
       this.availableCategories = temp
       this.selectedCategories.push(tag)
     },
-    async submit() {
-
-      this.request.Categories = this.selectedCategories
-
-
-      let res = await this.$axios.post("/requestService", this.request)
-
-
-      this.error.error = {
-        Error: "Success! Your request has been submitted",
-        Code: ""
-      }
-      this.error.show = true
-      this.error.type = "success"
-    }
   },
   async mounted() {
     if(this.$store.state.categories.length == 0) {
@@ -236,7 +251,15 @@ export default {
           this.error.show = true
         })
     }
+    try {
+      await this.$recaptcha.init()
+    } catch (e) {
+      console.error(e);
+    }
     this.availableCategories = this.$store.state.categories
+  },
+  beforeDestroy() {
+    this.$recaptcha.destroy()
   }
 }
 </script>

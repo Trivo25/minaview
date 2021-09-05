@@ -27,7 +27,12 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    {
+      src: './plugins/amChart',
+      ssr: false,
+    },
+  ],
   target: 'static',
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -40,10 +45,29 @@ export default {
     'vue-masonry-css',
   ],
 
+  publicRuntimeConfig: {
+    recaptcha: {
+      /* reCAPTCHA options */
+      // hideBadge: Boolean, // Hide badge element (v3 & v2 via size=invisible)
+      // language: String,   // Recaptcha language (v2)
+      version: 3,
+      siteKey: '6LeIakEcAAAAALiVrDKecxEtXLzyN7OQRbCQRKuO', //process.env.RECAPTCHA_SITE_KEY // for example
+    },
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', 'vue-masonry-css'],
+  modules: ['@nuxtjs/axios', 'vue-masonry-css', '@nuxtjs/recaptcha'],
+
+  // recaptcha: {
+  //   hideBadge: Boolean, // Hide badge element (v3 & v2 via size=invisible)
+  //   language: String, // Recaptcha language (v2)
+  //   siteKey: String, // Site key for requests
+  //   version: Number, // Version
+  //   size: String, // Size: 'compact', 'normal', 'invisible' (v2)
+  // },
+
   axios: {
-    baseURL: DEV ? 'http://localhost:8000' : 'https://api.technotro.com',
+    baseURL: DEV ? 'http://localhost:8000' : 'https://api.minaview.com',
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

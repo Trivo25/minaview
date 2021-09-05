@@ -1,13 +1,39 @@
 <template>
   <div @click="handleClick()" class="card-wrapper">
     <div class="card">
-      <div v-if="service.Github != null && service.Github != ''" class="stats">
+      <div class="stats">
+        <div class="left">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+              color="green"
+              v-bind="attrs"
+              v-on="on"
+              v-if="service.Verified"
+              >mdi-shield-check</v-icon>
+              </template>
+            <span>This project has been verified to be a legitimate service.</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+              color="green"
+              v-bind="attrs"
+              v-on="on"
+              v-if="service.Audited"
+              @click="goTo(service.Audit)"
+              >mdi-shield-lock</v-icon>
+              </template>
+            <span>This project has been audited by a security firm. Click for more information.</span>
+          </v-tooltip>
+        </div>
+        <div v-if="service.Github != null && service.Github != ''" class="right"> 
+          <v-icon>mdi-star</v-icon>
+          <span>{{service.GithubStars}}</span>
 
-        <v-icon>mdi-star</v-icon>
-        <span>{{service.GithubStars}}</span>
-
-        <v-icon>mdi-source-branch</v-icon>
-        <span>{{service.GithubForks}}</span>
+          <v-icon>mdi-source-branch</v-icon>
+          <span>{{service.GithubForks}}</span>
+        </div>
         
       </div>
       <div class="card-header">
@@ -84,6 +110,54 @@ export default {
   justify-content: right;
   margin-left: 5px;
   width: 100%;
+}
+
+.left {
+  float: left;
+  align-content: left;
+  text-align: left;
+  justify-content: left;
+  width: 50%;
+}
+
+.left .v-icon {
+  /* -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate; */
+  /* text-shadow: 0 0 2px rgba(255, 255, 255, 0.207), 0 0 8px rgba(255, 255, 255, 0.234), 0 0 6px #115f001e, 0 0 8px #115f001e, 0 0 9px #115f001e, 0 0 10px #115f001e, 0 0 12px #115f001e; */
+  animation: hoverIconOut 0.3s forwards;;
+}
+
+.left .v-icon:hover {
+  animation: hoverIcon 1s forwards;;
+}
+@keyframes hoverIcon {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+
+@keyframes hoverIconOut {
+  0% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}
+
+
+
+.right {
+  float: right;
+  align-content: right;
+  text-align: right;
+  justify-content: right;
+  width: 50%;
 }
 
 .stats .v-icon {

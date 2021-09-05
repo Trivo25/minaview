@@ -7,7 +7,7 @@
       fixed
       app
     >
-    <TagNav :isLoading="isLoading" :categories="categories"/>
+    <TagNav :isLoading="isLoading" :propsCategories="categories"/>
     <v-spacer></v-spacer>
     <div class="socials">
       <span>Made by Trivo on <a href="https://www.github.com/trivo25/mina-view" class="mdi mdi-github"></a></span>

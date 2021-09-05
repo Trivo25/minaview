@@ -21,7 +21,7 @@
       </v-chip>
     </v-row>
     <v-row
-      v-for="(item, i) in categories"
+      v-for="(item, i) in propsCategories"
       :key="i"
     >
       <v-chip
@@ -47,7 +47,7 @@ import Loader from "./Loader.vue"
 
 export default {
   name: "TagNav",
-  props: ["categories", "isLoading"],
+  props: ["propsCategories", "isLoading"],
   components: {
     Loader
   },
@@ -82,6 +82,11 @@ export default {
         path: this.routeParams()
       })
     },
+    parseParams() {
+      let categories = this.$route.query.categories
+      if(categories == null || categories == undefined) return [""]
+      return categories.split(',');
+    },
     clearSelection() {
       this.allChip.isActive = true
       this.params = new Array()
@@ -107,11 +112,20 @@ export default {
       return this.$store.state.services.length
     }
   },
+  watch: { 
+  	propsCategories: function(newVal, oldVal) {
+      this.categories = newVal
+      let params = this.parseParams()
+      
+      if(params[0] != '') {
+        params.forEach(param => {
+          this.categories.find(x => x.CategoryKey == param).isActive = true
+          console.log()
+        })
+      }
+    }
+  },
   async mounted() {
-    this.categories = this.$props.categories//await this.$store.state.categories
-    this.categories.forEach(cat => {
-      cat.isActive = false
-    })
   },
 }
 </script>

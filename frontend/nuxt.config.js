@@ -67,7 +67,7 @@ export default {
   // },
 
   axios: {
-    baseURL: DEV ? 'http://localhost:8000' : 'https://api.technotro.com',
+    baseURL: DEV ? 'http://localhost:8000' : 'https://api.minaview.com',
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

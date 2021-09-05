@@ -46,11 +46,11 @@ export default {
 <style scoped>
 
 .header {
-  margin-top: 0px;
+  margin-top: 50px;
 }
 
 .header img {
-  height: 100px;
+  height: 200px;
 }
 
 .bn {

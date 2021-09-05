@@ -12,16 +12,6 @@
           <!-- <span class="sort-option">GitHub Stars
             <v-icon v-if="sortGithubStars" @click="sortGithubStars = !sortGithubStars" color="#a5a5a5">mdi-arrow-up</v-icon>
             <v-icon v-if="!sortGithubStars" @click="sortGithubStars = !sortGithubStars" color="#a5a5a5">mdi-arrow-down</v-icon>
-          </span>
-          <span class="sort-spacer">|</span>
-          <span class="sort-option">Likes
-            <v-icon color="#a5a5a5" v-if="sortLikes" @click="sortLikes = !sortLikes">mdi-arrow-up</v-icon>
-            <v-icon v-if="!sortLikes" @click="sortLikes = !sortLikes" color="#a5a5a5">mdi-arrow-down</v-icon>
-          </span>
-          <span class="sort-spacer">|</span>
-          <span class="sort-option">Downloads
-            <v-icon color="#a5a5a5" v-if="sortDownloads" @click="sortDownloads = !sortDownloads">mdi-arrow-up</v-icon>
-            <v-icon v-if="!sortDownloads" @click="sortDownloads = !sortDownloads" color="#a5a5a5">mdi-arrow-down</v-icon>
           </span> -->
         </v-row>
       </div>      
@@ -194,26 +184,10 @@ export default {
   margin-left: 15px;
 }
 
-.sticky-wrapper {
-  width: 100%;
-  height: 50px;
-  top: 0;
-  /* border: solid 1px red; */
-  /* position: sticky;
-  backdrop-filter: blur(10px);
-  top: 60px;
-  z-index: 5; */
-  /* centering */
-  /* margin-right: 0px !important;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);   */
-}
-
 .search-form {
   position: relative;
   width: 100%;
-  /* left: 50%; */
+
 }
 
 

@@ -113,19 +113,25 @@ export default {
     }
   },
   watch: { 
-  	propsCategories: function(newVal, oldVal) {
-      this.categories = newVal
-      let params = this.parseParams()
-      
-      if(params[0] != '') {
-        params.forEach(param => {
-          this.categories.find(x => x.CategoryKey == param).isActive = true
-          console.log()
-        })
-      }
-    }
+  	// propsCategories: function(newVal, oldVal) {
+    //   this.categories = newVal
+    //   let params = this.parseParams()
+    //   this.categories.forEach(cat => {
+    //     cat.isActive = false
+    //   })
+    //   if(params[0] != '') {
+    //     params.forEach(param => {
+    //       this.categories.find(x => x.CategoryKey == param).isActive = true
+    //       console.log()
+    //     })
+    //   }
+    // }
   },
   async mounted() {
+    this.categories = this.$props.propsCategories
+    this.categories.forEach(cat => {
+      cat.isActive = false
+    })
   },
 }
 </script>

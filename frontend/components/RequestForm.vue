@@ -210,14 +210,23 @@ export default {
         this.request.Code = token
 
         let res = await this.$axios.post("/requestService", this.request)
-
-
-        this.error.error = {
-          Error: "Success! Your request has been submitted",
-          Code: ""
+        console.log(res.data.Error)
+        if(res.data.Error != undefined) {
+          this.error.error = {
+            Error: res.data.Error,
+            Code: ""
+          }
+          this.error.show = true
+          this.error.type = "error"
+        } else {
+          this.error.error = {
+            Error: "Your request has been sent!",
+            Code: ""
+          }
+          this.error.show = true
+          this.error.type = "success"
         }
-        this.error.show = true
-        this.error.type = "success"
+
         } catch (error) {
           console.log('Login error:', error)
         }

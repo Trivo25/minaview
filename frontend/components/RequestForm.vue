@@ -4,7 +4,6 @@
       height="70%"
     >
     <form @submit.prevent="onSubmit">
-      <h1 style="color: red; font-weight: 300;">For changes or new services please follow <a href="https://github.com/Trivo25/mina-view/issues/6">this link </a></h1>
         <v-row>
           <v-col cols=6>
             <v-text-field

@@ -43,6 +43,7 @@
 
 <script>
 import Loader from "./Loader.vue"
+import { mapGetters } from 'vuex'
 
 
 export default {
@@ -105,7 +106,7 @@ export default {
   computed: {
     totalServices() {
       return this.$store.state.services.length
-    }
+    },
   },
   async mounted() {
     this.categories = this.$props.categories//await this.$store.state.categories

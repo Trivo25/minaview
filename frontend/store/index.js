@@ -6,11 +6,13 @@
 export const state = {
   services: new Array(),
   categories: new Array(),
+  serviceCount: 0,
 }
 
 export const mutations = {
   setServices(state, services) {
     state.services = services
+    state.serviceCount = services.length
   },
   setCategories(state, categories) {
     state.categories = categories

@@ -3,29 +3,36 @@
     <div class="card">
       <div class="stats">
         <div class="left">
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon
-              color="green"
-              v-bind="attrs"
-              v-on="on"
-              v-if="service.Verified"
-              >mdi-shield-check</v-icon>
-              </template>
-            <span>This project has been verified to be a legitimate service.</span>
-          </v-tooltip>
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon
-              color="green"
-              v-bind="attrs"
-              v-on="on"
-              v-if="service.Audited"
-              @click="goTo(service.Audit)"
+
+          <template
+            v-if="service.Verified"
+          >
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon
+                color="green"
+                v-bind="attrs"
+                v-on="on"
+                >mdi-shield-check</v-icon>
+                </template>
+              <span>This project has been verified to be a legitimate service.</span>
+            </v-tooltip>
+          </template>
+          <template
+            v-if="service.Audited"
+          >
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon
+                color="green"
+                v-bind="attrs"
+                v-on="on"
+                @click="goTo(service.Audit)"
               >mdi-shield-lock</v-icon>
               </template>
-            <span>This project has been audited by a security firm. Click for more information.</span>
-          </v-tooltip>
+              <span>This project has been audited by a security firm. Click for more information.</span>
+            </v-tooltip>
+          </template>
         </div>
         <div v-if="service.Github != null && service.Github != ''" class="right"> 
           <v-icon>mdi-star</v-icon>

@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <NotificationCard @closeNotification="showInformation = false" v-if="showInformation" />
+    <NotificationCard class="hint" @closeNotification="showInformation = false" v-if="showInformation" />
     <v-navigation-drawer
       v-model="drawer"
       :clipped="clipped"
@@ -100,6 +100,12 @@ export default {
         
       })
 
+    // window.onresize = () => {
+      if(window.innerWidth <= 600) {
+        this.drawer = false
+        this.clipped = false
+      }
+    // }
 
     this.isLoading = false
 
@@ -228,4 +234,13 @@ export default {
 }
 
 
+@media only screen and (max-width: 600px) {
+  .add-service-button, .mina-logo, .title, .hint {
+    display: none;
+  }
+
+  .v-navigation-drawer {
+    background-color: rgb(40, 51, 77) !important;
+  }
+}
 </style>

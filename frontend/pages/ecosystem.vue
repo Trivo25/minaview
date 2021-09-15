@@ -212,4 +212,19 @@ ul {
     column-count: 1 !important;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .card-item {
+    margin-left: 50px;
+    margin-right: 50px;
+    width: auto;
+  }
+
+  .search-form {
+    margin-left: 50px;
+    margin-right: 50px;
+    width: auto;
+  }
+}
+
 </style>

@@ -87,7 +87,8 @@ export default {
   methods: {
     async handleClick() {
       //window.location.href = this.$props.service.ServiceWebsite
-      window.open(this.$props.service.ServiceWebsite, '_blank')
+      // window.open(this.$props.service.ServiceWebsite, '_blank')
+      this.$router.push(`/project/?prj=${this.$props.service.ServiceHash}`)
       let res = await this.$axios.post("/hitService", this.$props.service)
       
     },

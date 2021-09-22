@@ -56,7 +56,8 @@
         </div>
         <div class="right">
           <h2>What users think</h2>
-          <RatedBar />
+          <RatedBar :hash="getServiceHash()" />
+          <div class="seperator"></div>
           <CommentWrapper />
         </div>
       </div>

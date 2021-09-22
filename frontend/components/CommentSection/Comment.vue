@@ -36,7 +36,8 @@ export default {
 <style scoped>
 
 .comment-wrapper {
-  background-color: rgb(41, 43, 59);
+  /* background-color: rgb(41, 43, 59); */
+  background-color: rgb(17, 44, 56);
   border-radius: 15px;
   display: flex;
   justify-content: center;

@@ -39,6 +39,7 @@
 <script>
 export default {
   name: "RatedBar",
+  props: ["hash"],
   data() {
     return {
       up: 59,
@@ -72,12 +73,12 @@ export default {
       }
       let n = Date.now() + 8.64e+7
       this.nextVote = n
-      localStorage.setItem('minaview_nextVote', n)
+      localStorage.setItem(`minaview_nextVote_${this.$props.hash}`, n)
       this.hasVoted = true
     }
   },
   mounted() {
-    this.nextVote = localStorage.getItem('minaview_nextVote')
+    this.nextVote = localStorage.getItem(`minaview_nextVote_${this.$props.hash}`)
   }
 }
 </script>
@@ -92,10 +93,10 @@ export default {
   border-radius: 15px;
   width: 100%;
   height: 80px;
-  background-color: rgb(41, 43, 59);
-  box-shadow: 1px 1px 1px rrgba(255, 255, 255, 0.241);
+  background-color: rgb(17, 44, 56);
   max-width: 700px;
   margin: auto;
+  border: solid 1px rgba(112, 112, 112, 0.5);
 }
 
 .info-card {

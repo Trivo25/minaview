@@ -52,7 +52,7 @@
       <h1 class="project-title">{{ service.ServiceName }}</h1>
       <div class="socials">
         <v-btn @click="goTo(service.Github)" v-if="service.Github != ''" icon><v-icon class="social" color="#4078c0">mdi-github</v-icon></v-btn>
-        <v-btn @click="goTo(service.Telegram)" v-if="service.Telegram != ''" icon><v-icon class="social" color="#26A5E4">mdi-telegram</v-icon></v-btn>
+        <v-btn @click="goTo(service.Telegram)" v-if="service.Telegram != ''" icon><v-icon class="social" color="#26A5E4">mdi-phone</v-icon></v-btn>
         <v-btn @click="goTo(service.Reddit)" v-if="service.Reddit != ''" icon><v-icon class="social" color="#FF4500">mdi-reddit</v-icon></v-btn>
         <v-btn @click="goTo(service.Discord)" v-if="service.Discord != ''" icon><v-icon class="social" color="#5865F2">mdi-discord</v-icon></v-btn>
         <v-btn @click="goTo(service.Slack)" v-if="service.Slack != ''" icon><v-icon class="social" color="#4A154B">mdi-slack</v-icon></v-btn>
@@ -89,8 +89,6 @@ export default {
       //window.location.href = this.$props.service.ServiceWebsite
       // window.open(this.$props.service.ServiceWebsite, '_blank')
       this.$router.push(`/project/?prj=${this.$props.service.ServiceHash}`)
-      let res = await this.$axios.post("/hitService", this.$props.service)
-      
     },
     goTo(url) {
       window.open(url, '_blank')
@@ -112,6 +110,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
 
 .stats {
   float: right;
@@ -181,7 +180,6 @@ export default {
 .socials {
   align-items: center;
   margin: 5px;
-
 }
 
 .socials .v-icon {
@@ -234,7 +232,7 @@ export default {
 .project-title {
   margin-top: 15px;
   font-weight: 400;
-  font-family: "Roboto";
+  font-family: "Open Sans";
   color: rgb(255, 255, 255);
   text-shadow: 2px 2px 2px black;
 }

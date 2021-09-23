@@ -2,14 +2,29 @@
   <div class="comment-wrapper">
     <div class="form-section">
       <h2>What is on your mind?</h2>
+      <v-row>
+        <v-col
+          cols="4"
+        >
+          <v-text-field
+            placeholder="Satoshi Nakamoto"
+            label="Name"
+            v-model="username"
+          ></v-text-field>
+        </v-col>
+      </v-row>
       <v-textarea
         class="text-field"
         placeholder="Share your experience!"
         rows="3"
+        v-model="comment"
         :rules="[(v => (v || '' ).length <= 250 || 'Description can not be greater than 250 characters'), v => (v || '' ).length >= 10 || 'Description can not be less than 10 characters']"
       />
+      <span v-if="profane" class="profane-language-hint">Oooopsie wooopsie.. Please double check what you wrote - no profane language!</span>
+      <span v-if="sent" class="message-sent-hint">Your comment has been sent and will be reviewed for spam and insults before posting.</span>
       <v-btn
         class="submit-button"
+        @click="sendComment()"
       >SUBMIT 
       <v-icon>mdi-send</v-icon>
       </v-btn>
@@ -23,24 +38,48 @@
       <div class="seperator"></div>
       <Comment />
     </div>
+  <!-- <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" :type="error.type" /> -->
   </div>
 </template>
 
 <script>
 import Comment from "./Comment.vue"
 
-
 export default {
   name: "CommentWrapper",
   data() {
     return {
+      username: "",
+      comment: "",
+      profane: false,
+      sent: false,
+      error: {
+        error: null,
+        show: false,
+        type:"success"
+      }
+    }
+  },
+  methods: {
+    check(msg) {
+      var Filter = require('bad-words')
+      var f = new Filter();
+      return f.isProfane(msg)
+    },
+    async sendComment() {
+      this.sent = false
+      if(this.check(this.username) || this.check(this.comment)) {
+        this.profane = true
+        return
+      } else {
+        this.profane = false
+
+        this.sent = true
+      }
     }
   },
   mounted() {
-    var Filter = require('bad-words'),
-    filter = new Filter();
-
-    console.log(filter.isProfane("Don't be an ash0le")); //Don't be an ******
+    
   }
 }
 </script>
@@ -49,6 +88,17 @@ export default {
 
 .comment-wrapper {
 
+}
+
+.profane-language-hint {
+  margin-top: 0;
+  font-size: 0.8rem;
+  color: red;
+}
+.message-sent-hint {
+  margin-top: 0;
+  font-size: 0.8rem;
+  color: green;
 }
 
 .seperator {
@@ -87,7 +137,8 @@ export default {
 }
 
 .text-field {
-  padding: 15px;
+  padding: 5px;
+  margin-bottom: 0;
 }
 
 .submit-button {

@@ -28,12 +28,20 @@
 
 <script>
 import Comment from "./Comment.vue"
+
+
 export default {
   name: "CommentWrapper",
   data() {
     return {
     }
   },
+  mounted() {
+    var Filter = require('bad-words'),
+    filter = new Filter();
+
+    console.log(filter.isProfane("Don't be an ash0le")); //Don't be an ******
+  }
 }
 </script>
 

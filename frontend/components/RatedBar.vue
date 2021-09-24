@@ -37,13 +37,15 @@
 </template>
 
 <script>
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
+
 export default {
   name: "RatedBar",
-  props: ["hash"],
+  props: ["hash", "up", "down"],
   data() {
     return {
-      up: 59,
-      down: 8,
+      up: 0,
+      down: 0,
       userVote: true,
       hasVoted: false,
       nextVote: null
@@ -52,33 +54,66 @@ export default {
   computed: {
     voted() {
       if(this.hasVoted) return true
-      if (this.nextVote <= Date.now()) {
-        return false
-      } else if(this.nextVote == null) {
-        return false
-      }
-      return true
+      // if (this.nextVote <= Date.now()) {
+      //   return false
+      // } else if(this.nextVote == null) {
+      //   return false
+      // }
+      // return true
     }
   },
   methods: {
-    vote(v) {
-      // 24hrs 8.64e+7
-
+    async vote(v) {
+      let up = 0
+      let down = 0
+      let fingerprint = await this.getFingerprint()
       if(v) {
         this.userVote = true
         this.up += 1
+        up += 1
       } else {
         this.userVote = false
         this.down += 1
+        down += 1  
       }
       let n = Date.now() + 8.64e+7
-      this.nextVote = n
-      localStorage.setItem(`minaview_nextVote_${this.$props.hash}`, n)
+      // this.nextVote = n
+      // localStorage.setItem(`nv_${this.$props.hash}`, n)
       this.hasVoted = true
+
+      let res = (await this.$axios.post("/vote", {
+        serviceHash: this.$props.hash,
+        fingerprint: fingerprint,
+        up: up,
+        down: down,
+        nextVote: n,
+        currentTime: Date.now()
+      }))
+
+    },
+    async getFingerprint() {
+      const fpPromise = FingerprintJS.load()
+      const fp = await fpPromise
+      const result = await fp.get()
+
+      return result.visitorId
     }
   },
-  mounted() {
-    this.nextVote = localStorage.getItem(`minaview_nextVote_${this.$props.hash}`)
+  async mounted() {
+    // this.nextVote = localStorage.getItem(`nv_${this.$props.hash}`)
+
+    // TODO: get last vote by fingerprint
+
+    this.up = this.$props.up
+    this.down = this.$props.down
+    let fingerprint = await this.getFingerprint()
+
+    let res = (await this.$axios.post("/hasVoted", {
+        fingerprint: fingerprint,
+        serviceHash: this.$props.hash
+      })).data.Data
+    res.HasVoted ? this.hasVoted = true : this.hasVoted = false
+
   }
 }
 </script>

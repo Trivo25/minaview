@@ -44,7 +44,7 @@
 
 <script>
 import Comment from "./Comment.vue"
-
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
 export default {
   name: "CommentWrapper",
   data() {
@@ -67,6 +67,8 @@ export default {
       return f.isProfane(msg)
     },
     async sendComment() {
+      let fingerprint = await this.getFingerprint()
+      console.log(fingerprint)
       this.sent = false
       if(this.check(this.username) || this.check(this.comment)) {
         this.profane = true
@@ -76,6 +78,13 @@ export default {
 
         this.sent = true
       }
+    },
+    async getFingerprint() {
+      const fpPromise = FingerprintJS.load()
+      const fp = await fpPromise
+      const result = await fp.get()
+
+      return result.visitorId
     }
   },
   mounted() {

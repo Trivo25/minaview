@@ -15,6 +15,7 @@
     "@dicebear/avatars": "^4.9.1",
     "@dicebear/avatars-identicon-sprites": "^4.9.1",
     "@dicebear/avatars-male-sprites": "^4.9.1",
+    "@fingerprintjs/fingerprintjs": "^3.3.0",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/recaptcha": "^1.0.0",
     "bad-words": "^3.0.4",

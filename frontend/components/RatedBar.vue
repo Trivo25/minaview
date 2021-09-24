@@ -7,9 +7,9 @@
       </div>
       <div class="bar-card">
         <div class="bar">
-          <div class="green" v-bind:style="{ width: (up/(up + down) * 100) + '%', backgroundColor: 'green' }">
+          <div class="green" v-bind:style="{ width: upWidth + '%', backgroundColor: 'green', borderRadius: upWidth == 100 ? '15px' : '' }">
           </div>
-          <div class="red" v-bind:style="{ width: (down/(up + down) * 100) + '%', backgroundColor: 'red'  }">
+          <div class="red" v-bind:style="{ width: downWidth + '%', backgroundColor: 'red', borderRadius: downWidth == 100 ? '15px' : ''   }">
           </div>
         </div>
         <div class="types">
@@ -52,6 +52,12 @@ export default {
     }
   },
   computed: {
+    upWidth() {
+      return (this.up/(this.up + this.down) * 100)
+    },
+    downWidth() {
+      return (this.down/(this.up + this.down) * 100)
+    },
     voted() {
       if(this.hasVoted) return true
       // if (this.nextVote <= Date.now()) {

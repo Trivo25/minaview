@@ -10,6 +10,7 @@
         </div>
         <div class="title">
           <h2>{{ service.ServiceName }}</h2>
+          <RatingStars :up="service.Up" :down="service.Down" />
           <p>{{ service.ServiceDescription }}</p>
         </div>
         <div class="card-chips">
@@ -72,6 +73,8 @@ import { Tweet } from 'vue-tweet-embed'
 import Loader from "../components/Loader.vue"
 import RatedBar from "../components/RatedBar.vue"
 import CommentWrapper from "../components/CommentSection/CommentWrapper.vue"
+import RatingStars from "../components/RatingStars.vue"
+
 export default {
   name: "project",
   layout: "project-page",
@@ -81,7 +84,8 @@ export default {
     Tweet,
     Loader,
     RatedBar,
-    CommentWrapper
+    CommentWrapper,
+    RatingStars
   },
   data () {
     return {

@@ -50,6 +50,7 @@
         
       </div>
       <h1 class="project-title">{{ service.ServiceName }}</h1>
+      <RatingStars :up="service.Up" :down="service.Down" />
       <div class="socials">
         <v-btn @click="goTo(service.Github)" v-if="service.Github != ''" icon><v-icon class="social" color="#4078c0">mdi-github</v-icon></v-btn>
         <v-btn @click="goTo(service.Telegram)" v-if="service.Telegram != ''" icon><v-icon class="social" color="#26A5E4">mdi-phone</v-icon></v-btn>
@@ -76,9 +77,15 @@
 </template>
 
 <script>
+import RatingStars from "./RatingStars.vue"
+
+
 export default {
   name: "ItemCard",
   props: ["service", "categories"],
+  components: {
+    RatingStars
+  },
   data() {
     return {
       tags: []

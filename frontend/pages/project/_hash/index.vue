@@ -73,27 +73,27 @@
             <ul>
               <li v-if="service.Github != ''">
                 <v-icon large class="social" color="#4078c0">mdi-github</v-icon>
-                <span>{{ service.Github }}</span>
+                <a :href="service.Github">{{ service.Github }}</a>
               </li>
               <li v-if="service.Telegram != ''">
                 <v-icon large class="social" color="#26A5E4">mdi-send</v-icon>
-                <span>{{ service.Telegram }}</span>
+                <a :href="service.Telegram">{{ service.Telegram }}</a>
               </li>
               <li v-if="service.Reddit != ''">
                 <v-icon large class="social" color="#FF4500">mdi-reddit</v-icon>
-                <span>{{ service.Reddit }}</span>
+                <a :href="service.Reddit">{{ service.Reddit }}</a>
               </li>
               <li v-if="service.Discord != ''">
                 <v-icon large class="social" color="#5865F2">mdi-discord</v-icon>
-                <span>{{ service.Discord }}</span>
+                <a :href="service.Discord">{{ service.Discord }}</a>
               </li>
               <li v-if="service.Slack != ''" >
                 <v-icon large class="social" color="#4A154B">mdi-slack</v-icon>
-                <span>{{ service.Slack }}</span>
+                <a :href="service.Slack">{{ service.Slack }}</a>
               </li>
               <li v-if="service.Twitter != ''">
                 <v-icon large class="social" color="#1DA1F2">mdi-twitter</v-icon>
-                <span>{{ service.Twitter }}</span>
+                <a :href="service.Twitter">{{ service.Twitter }}</a>
               </li>
             </ul>
           </div>
@@ -295,7 +295,7 @@ export default {
   list-style: none;
 }
 
-.socials ul span {
+.socials ul a {
   color: grey;
   font-weight: 300;
 }

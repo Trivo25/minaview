@@ -84,8 +84,8 @@ export default {
         let res = (await this.$axios.post("/comment", {
           service_hash: this.$props.service_hash,
           fingerprint: fingerprint,
-          username: "",
-          text: "",
+          username: this.username,
+          text: this.comment,
 
         }))
 

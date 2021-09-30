@@ -133,10 +133,11 @@ export default {
   text-align: center;
   border-radius: 15px;
   width: 100%;
-  height: 80px;
+  height: auto;
   background-color: rgb(17, 44, 56);
   max-width: 700px;
   margin: auto;
+  padding: 10px;
   border: solid 1px rgba(112, 112, 112, 0.5);
 }
 

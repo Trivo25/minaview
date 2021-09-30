@@ -2,6 +2,7 @@
   <v-app dark>
     <NotificationCard @closeNotification="showInformation = false" v-if="showInformation" />
     <v-navigation-drawer
+      class="nav-drawer"
       v-model="drawer"
       :clipped="clipped"
       fixed
@@ -114,6 +115,28 @@ export default {
 * {
   font-family: "Roboto";
 }  
+
+
+.nav-drawer ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.nav-drawer ::-webkit-scrollbar-track {
+  background: rgba(12, 2, 31, 0);
+  border: none;
+  box-shadow: none;
+}
+
+/* Handle */
+.nav-drawer ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.nav-drawer ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 .socials {
   height: 50px;

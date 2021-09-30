@@ -52,12 +52,12 @@
       <h1 class="project-title">{{ service.ServiceName }}</h1>
       <RatingStars :up="service.Up" :down="service.Down" />
       <div class="socials">
-        <v-btn @click="goTo(service.Github)" v-if="service.Github != ''" icon><v-icon class="social" color="#4078c0">mdi-github</v-icon></v-btn>
-        <v-btn @click="goTo(service.Telegram)" v-if="service.Telegram != ''" icon><v-icon class="social" color="#26A5E4">mdi-phone</v-icon></v-btn>
-        <v-btn @click="goTo(service.Reddit)" v-if="service.Reddit != ''" icon><v-icon class="social" color="#FF4500">mdi-reddit</v-icon></v-btn>
-        <v-btn @click="goTo(service.Discord)" v-if="service.Discord != ''" icon><v-icon class="social" color="#5865F2">mdi-discord</v-icon></v-btn>
-        <v-btn @click="goTo(service.Slack)" v-if="service.Slack != ''" icon><v-icon class="social" color="#4A154B">mdi-slack</v-icon></v-btn>
-        <v-btn @click="goTo(service.Twitter)" v-if="service.Twitter != ''" icon><v-icon class="social" color="#1DA1F2">mdi-twitter</v-icon></v-btn>
+        <v-btn v-if="service.Github != ''" icon><v-icon class="social" color="#4078c0">mdi-github</v-icon></v-btn>
+        <v-btn v-if="service.Telegram != ''" icon><v-icon class="social" color="#26A5E4">mdi-send</v-icon></v-btn>
+        <v-btn v-if="service.Reddit != ''" icon><v-icon class="social" color="#FF4500">mdi-reddit</v-icon></v-btn>
+        <v-btn v-if="service.Discord != ''" icon><v-icon class="social" color="#5865F2">mdi-discord</v-icon></v-btn>
+        <v-btn v-if="service.Slack != ''" icon><v-icon class="social" color="#4A154B">mdi-slack</v-icon></v-btn>
+        <v-btn v-if="service.Twitter != ''" icon><v-icon class="social" color="#1DA1F2">mdi-twitter</v-icon></v-btn>
       </div>
       <div class="card-content">
         <p>{{ service.ServiceDescription }}</p>
@@ -95,7 +95,7 @@ export default {
     async handleClick() {
       //window.location.href = this.$props.service.ServiceWebsite
       // window.open(this.$props.service.ServiceWebsite, '_blank')
-      this.$router.push(`/project/?prj=${this.$props.service.ServiceHash}`)
+      this.$router.push(`/project/${this.$props.service.ServiceHash}`)
     },
     goTo(url) {
       window.open(url, '_blank')

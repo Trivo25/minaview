@@ -2,16 +2,16 @@
   <div class="comment-wrapper">
     <div class="left">
       <div class="avatar">
-        <Avatar :hash="new Date().toLocaleString()"/>
+        <Avatar :hash="hash"/>
       </div>
       <div class="date">
-        <span>{{ new Date().toLocaleString() }}</span>
+        <span>{{ new Date(($props.time * 1000)).toLocaleString() }}</span>
       </div>
     </div>
     <div class="right">
       <div class="comment-box">
         <p class="comment">
-          Awesome Protocol! Just checked it out and I am amazed.. Can't wait to get started doing something awesome with it!
+          {{ $props.message }}
         </p>
       </div>
     </div>
@@ -23,6 +23,7 @@ import Avatar from "./Avatar.vue"
 
 export default {
   name: "Comment",
+  props: ["name","message", "hash", "time"],
   components: {
     Avatar
   },

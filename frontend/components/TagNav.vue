@@ -136,6 +136,7 @@ export default {
   margin-right: 5px !important;
   font-size: 0.8rem !important;
   border: solid 1px rgba(128, 128, 128, 0.5);
+  z-index: 5;
 }
 
 .theme--light .chip-item {

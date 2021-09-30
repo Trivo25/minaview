@@ -30,13 +30,12 @@
       </v-btn>
     </div>
     <div class="comment-list">
-      <Comment />
-      <div class="seperator"></div>
-      <Comment />
-      <div class="seperator"></div>
-      <Comment />
-      <div class="seperator"></div>
-      <Comment />
+      <template v-for="(comment, c) in comments">
+        <div :key="c">
+          <Comment :name="comment.username" :message="comment.text" :hash="comment.hash" :time="comment.time"/>
+          <div class="seperator"></div>
+        </div>
+      </template>
     </div>
   <!-- <Error @closeNotification="error.show = false" v-if="error.show" :error="error.error" :type="error.type" /> -->
   </div>
@@ -45,8 +44,13 @@
 <script>
 import Comment from "./Comment.vue"
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
+
 export default {
   name: "CommentWrapper",
+  props: ["comments", "service_hash"],
+  components: {
+    Comment
+  },
   data() {
     return {
       username: "",
@@ -75,6 +79,16 @@ export default {
         return
       } else {
         this.profane = false
+
+
+        let res = (await this.$axios.post("/comment", {
+          service_hash: this.$props.service_hash,
+          fingerprint: fingerprint,
+          username: "",
+          text: "",
+
+        }))
+
 
         this.sent = true
       }

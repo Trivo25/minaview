@@ -9,7 +9,37 @@
           <img :src="service.ServiceLogo" alt="Project Logo">
         </div>
         <div class="title">
-          <h2>{{ service.ServiceName }}</h2>
+          <div>
+            <h2>{{ service.ServiceName }}</h2>
+            <template
+              v-if="service.Verified"
+            >
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                  color="green"
+                  v-bind="attrs"
+                  v-on="on"
+                  >mdi-shield-check</v-icon>
+                  </template>
+                <span>This project has been verified to be a legitimate service.</span>
+              </v-tooltip>
+            </template>
+            <template
+              v-if="service.Audited"
+            >
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                  color="green"
+                  v-bind="attrs"
+                  v-on="on"
+                >mdi-shield-lock</v-icon>
+                </template>
+                <span>This project has been audited by a security firm.</span>
+              </v-tooltip>
+            </template>
+          </div>
           <RatingStars :up="service.Up" :down="service.Down" />
           <p>{{ service.ServiceDescription }}</p>
         </div>
@@ -40,12 +70,32 @@
         <div class="left">
           <h2>Social Media</h2>
           <div class="socials">
-            <v-btn @click="goTo(service.Github)" v-if="service.Github != ''" icon><v-icon large class="social" color="#4078c0">mdi-github</v-icon></v-btn>
-            <v-btn @click="goTo(service.Telegram)" v-if="service.Telegram != ''" icon><v-icon large class="social" color="#26A5E4">mdi-phone</v-icon></v-btn>
-            <v-btn @click="goTo(service.Reddit)" v-if="service.Reddit != ''" icon><v-icon large class="social" color="#FF4500">mdi-reddit</v-icon></v-btn>
-            <v-btn @click="goTo(service.Discord)" v-if="service.Discord != ''" icon><v-icon large class="social" color="#5865F2">mdi-discord</v-icon></v-btn>
-            <v-btn @click="goTo(service.Slack)" v-if="service.Slack != ''" icon><v-icon large class="social" color="#4A154B">mdi-slack</v-icon></v-btn>
-            <v-btn @click="goTo(service.Twitter)" v-if="service.Twitter != ''" icon><v-icon large class="social" color="#1DA1F2">mdi-twitter</v-icon></v-btn>
+            <ul>
+              <li v-if="service.Github != ''">
+                <v-icon large class="social" color="#4078c0">mdi-github</v-icon>
+                <span>{{ service.Github }}</span>
+              </li>
+              <li v-if="service.Telegram != ''">
+                <v-icon large class="social" color="#26A5E4">mdi-send</v-icon>
+                <span>{{ service.Telegram }}</span>
+              </li>
+              <li v-if="service.Reddit != ''">
+                <v-icon large class="social" color="#FF4500">mdi-reddit</v-icon>
+                <span>{{ service.Reddit }}</span>
+              </li>
+              <li v-if="service.Discord != ''">
+                <v-icon large class="social" color="#5865F2">mdi-discord</v-icon>
+                <span>{{ service.Discord }}</span>
+              </li>
+              <li v-if="service.Slack != ''" >
+                <v-icon large class="social" color="#4A154B">mdi-slack</v-icon>
+                <span>{{ service.Slack }}</span>
+              </li>
+              <li v-if="service.Twitter != ''">
+                <v-icon large class="social" color="#1DA1F2">mdi-twitter</v-icon>
+                <span>{{ service.Twitter }}</span>
+              </li>
+            </ul>
           </div>
           <Tweet
             class="tweet"
@@ -59,7 +109,7 @@
           <h2>What users think</h2>
           <RatedBar :hash="getServiceHash()" :up="service.Up" :down="service.Down" />
           <div class="seperator"></div>
-          <CommentWrapper />
+          <CommentWrapper :comments="service.Comments" :service_hash="service.ServiceHash" />
         </div>
       </div>
     </div>
@@ -68,12 +118,12 @@
 </template>
 
 <script>
-import Error from "../components/Error.vue"
+import Error from "../../../components/Error.vue"
 import { Tweet } from 'vue-tweet-embed'
-import Loader from "../components/Loader.vue"
-import RatedBar from "../components/RatedBar.vue"
-import CommentWrapper from "../components/CommentSection/CommentWrapper.vue"
-import RatingStars from "../components/RatingStars.vue"
+import Loader from "../../../components/Loader.vue"
+import RatedBar from "../../../components/RatedBar.vue"
+import CommentWrapper from "../../../components/CommentSection/CommentWrapper.vue"
+import RatingStars from "../../../components/RatingStars.vue"
 
 export default {
   name: "project",
@@ -101,7 +151,7 @@ export default {
   },
   methods: {
     getServiceHash() {
-      return this.$route.query.prj
+      return this.$route.params.hash
     },
   },
   computed: {
@@ -156,6 +206,8 @@ export default {
 * {
   font-family: "Open Sans"
 }
+
+
 .open-website-button {
   /* background: rgb(91,0,255); */
   border: rgb(91,0,255) solid 2px !important;
@@ -239,8 +291,17 @@ export default {
   text-align: center;
 }
 
-.socials .v-icon {
-  margin: 8px;
+.socials ul {
+  list-style: none;
+}
+
+.socials ul span {
+  color: grey;
+  font-weight: 300;
+}
+
+.socials ul .v-icon {
+  margin: 3px;
 }
 
 .social {

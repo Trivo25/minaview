@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <span>Test</span>
+  <div class="drawer">
+    <span class="title">{{title}}</span>
     <v-btn
       icon
       @click="show = !show"
@@ -12,7 +12,16 @@
           <v-divider></v-divider>
 
           <v-card-text>
-            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+            <div class="content-wrapper">
+              <p class="content" v-html="content"></p>
+            </div>
+            <div class="ref-wrapper">
+              <template v-for="(ref, r) in references">
+                <div :key="r">
+                  <span class="">[{{ r }}]</span> <a class="ref-link" :href="ref" target="_blank">{{ ref }}</a>
+                </div>
+              </template>
+            </div>
           </v-card-text>
         </div>
       </v-expand-transition>
@@ -22,7 +31,7 @@
 <script>
 export default {
   name: "Drawer",
-  props: ["title", "content"],
+  props: ["title", "content", "references"],
   data() {
     return {
      show: false 
@@ -31,3 +40,45 @@ export default {
   methods: {}
 }
 </script>
+
+<style scoped>
+
+.drawer {
+  margin-top: 5px;
+}
+
+.title {
+  margin-left: 35px;
+}
+
+.content {
+  margin-left: 10px;
+
+}
+
+.content-wrapper {
+  border-left: 2px solid rgb(98, 98, 98);
+  height: 100%;
+  margin-left: 35px;
+}
+
+ .ref-wrapper {
+  margin-left: 45px;
+ }
+
+ a:link {
+  color: rgb(255, 255, 255);
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+a:active {
+  color: white;
+}
+</style>

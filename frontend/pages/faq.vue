@@ -1,9 +1,18 @@
 <template>
   <div class="faq">
     <h1 class="faq-title">Frequently Asked Questions</h1>
+    <div class="search-form-wrapper">
+      <v-text-field
+        placeholder="Searching for .."
+        class="search-form"
+        v-model="filter"
+      >
+
+      </v-text-field>
+    </div>
     <div class="content">
 
-      <template v-for="(subsection, s) in items">
+      <template v-for="(subsection, s) in filteredItems">
         <div :key="s">
           <h2 class="sub-section">{{(s + 1) + ' - ' + subsection.title}}</h2> 
           <v-divider></v-divider>
@@ -31,13 +40,35 @@ export default {
   },
   data() {
     return {
-      items: []
+      items: [],
+      filter: "",
     }
   },
   async mounted() {
     const response = await fetch('/faq.json');
     let json = await response.json()
     this.items = json
+  },
+  computed: {
+    filteredItems() {
+      if(this.filter == "") {
+        return this.items
+      }
+      
+      // let filteredSections = new Array()
+
+      // this.items.forEach(section => {
+      //   if (section.title.toLowerCase().includes(this.filter.toLowerCase()))
+      //     filteredSections.push(section)
+      // })
+
+
+      // return filteredSections
+
+
+      return this.items.filter(item => item.items.some(s => s.title.toLowerCase().includes(this.filter.toLowerCase())));
+
+    }  
   }
 }
 </script>
@@ -70,6 +101,16 @@ export default {
   font-size: 1.5rem;
   font-weight: 400;
   color: rgb(255, 255, 255);
+
+}
+
+.search-form-wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form {
+  width: 400px;
 
 }
 

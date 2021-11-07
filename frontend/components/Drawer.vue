@@ -1,12 +1,19 @@
 <template>
   <div class="drawer">
-    <span class="title">{{title}}</span>
+    <span :id="parseAnker(title)" class="title">{{title}}</span>
     <v-btn
       icon
       @click="show = !show"
     >
       <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
     </v-btn>
+    <v-btn
+      icon
+      :href="'#' + parseAnker(title)"
+    >
+      <v-icon>mdi-link</v-icon>
+    </v-btn>
+    
     <v-expand-transition>
         <div v-show="show">
           <v-divider></v-divider>
@@ -18,6 +25,7 @@
             <div class="ref-wrapper">
               <template v-for="(ref, r) in references">
                 <div :key="r">
+                  <span>References</span><br>
                   <span class="">[{{ r }}]</span> <a class="ref-link" :href="ref" target="_blank">{{ ref }}</a>
                 </div>
               </template>
@@ -37,7 +45,11 @@ export default {
      show: false 
     }
   },
-  methods: {}
+  methods: {
+    parseAnker(title) {
+      return title.replace(/ /g,"_")
+    }
+  }
 }
 </script>
 
@@ -53,7 +65,7 @@ export default {
 
 .content {
   margin-left: 10px;
-
+  font-size: 1.1rem;
 }
 
 .content-wrapper {
@@ -66,19 +78,33 @@ export default {
   margin-left: 45px;
  }
 
- a:link {
+a {
   color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: 200;
+}
+
+a:link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: 200;
 }
 
 a:visited {
   color: white;
+  text-decoration: none;
+  font-weight: 200;
 }
 
 a:hover {
   color: white;
+  text-decoration: none;
+  font-weight: 200;
 }
 
 a:active {
   color: white;
+  text-decoration: none;
+  font-weight: 200;
 }
 </style>

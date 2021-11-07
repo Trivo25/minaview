@@ -1,7 +1,7 @@
 <template>
-  <div class="drawer">
+  <div :id="parseAnker(title)" class="drawer">
     <!-- {{ selected }} -->
-    <span :id="parseAnker(title)" class="title">{{id + title}}</span>
+    <span class="title">{{id + title}}</span>
     <v-btn
       icon
       @click="show = !show"

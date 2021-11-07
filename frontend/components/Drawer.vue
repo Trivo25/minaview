@@ -1,6 +1,7 @@
 <template>
   <div class="drawer">
-    <span :id="parseAnker(title)" class="title">{{title}}</span>
+    <!-- {{ selected }} -->
+    <span :id="parseAnker(title)" class="title">{{id + title}}</span>
     <v-btn
       icon
       @click="show = !show"
@@ -39,7 +40,7 @@
 <script>
 export default {
   name: "Drawer",
-  props: ["title", "content", "references"],
+  props: ["title", "content", "references", "selected", "id"],
   data() {
     return {
      show: false 
@@ -49,7 +50,12 @@ export default {
     parseAnker(title) {
       return title.replace(/ /g,"_")
     }
-  }
+  },
+  mounted() {
+    if(this.$props.selected == this.parseAnker(this.$props.title)) {
+      this.show = true
+    }
+  },
 }
 </script>
 
@@ -61,50 +67,33 @@ export default {
 
 .title {
   margin-left: 35px;
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .content {
   margin-left: 10px;
   font-size: 1.1rem;
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .content-wrapper {
-  border-left: 2px solid rgb(98, 98, 98);
+  border-left: 1px solid rgb(100, 100, 100);
   height: 100%;
+  background-color: rgba(29, 29, 29, 1);
+  -webkit-text-stroke: none;
   margin-left: 35px;
+  padding: 5px;
 }
 
- .ref-wrapper {
+.ref-wrapper {
   margin-left: 45px;
- }
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+}
 
-a {
-  color: rgb(255, 255, 255);
+a, a:link, a:visited, a:hover, a:active {
+  color: rgb(184, 184, 184);
   text-decoration: none;
   font-weight: 200;
 }
 
-a:link {
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-  font-weight: 200;
-}
-
-a:visited {
-  color: white;
-  text-decoration: none;
-  font-weight: 200;
-}
-
-a:hover {
-  color: white;
-  text-decoration: none;
-  font-weight: 200;
-}
-
-a:active {
-  color: white;
-  text-decoration: none;
-  font-weight: 200;
-}
 </style>

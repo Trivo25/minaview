@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Core Protocol",
+    "items": [
+      {
+        "title": "What are zk-SNARKs?",
+        "content": "Zk-SNARK is an acronym that stands for “Zero-Knowledge Succinct Non-Interactive Argument of Knowledge.” A zk-SNARK is a cryptographic proof that allows one party to prove it possesses certain information without revealing that information. This proof is made possible using a secret key created before the transaction takes place.",
+        "references": [
+          "https://minaprotocol.com/blog/what-are-zk-snarks",
+          "https://www.youtube.com/watch?v=GvwYJDzzI-g"
+        ]
+      },
+      {
+        "title": "Are Archive Node essential for the network to run?",
+        "content": "No, they are not essential for the network to work as intended. Archive nodes are simply a node that provides convienient benefits of collecting the transaction history for services like Wallets or Blockexplorers.",
+        "references": ["https://docs.minaprotocol.com/en/advanced/archive-node"]
+      }
+    ]
+  },
+  {
+    "title": "Tokenomics and Staking",
+    "items": [
+      {
+        "title": "How can I stake my Mina?",
+        "content": "All available wallets for the Mina Protocol allow for easy staking by pressing a button and selecting your staking pool of choice. Please refer to the guide below.",
+        "references": ["https://www.aurowallet.com/mina-staking-guide/"]
+      },
+      {
+        "title": "The Wallet creation fee is too high - can it be changed?",
+        "content": "Nothing is set in stone - it requires just a small fork. And as long as the changes are as minor and undisputed as changing the fee there shouldn't be an issue with forking for that reason. Time will tell, but it can be changed.",
+        "references": []
+      },
+      {
+        "title": "Why is the circulating supply increasing so rapidly? Is someone dumping coins?",
+        "content": "Please refer to the vesting and inflation schedule.",
+        "references": [
+          "https://minaprotocol.com/blog/mina-token-distribution-and-supply"
+        ]
+      },
+      {
+        "title": "Will Mina start burning coins?",
+        "content": "Maybe. Check out the interview with Evan below.",
+        "references": ["https://www.youtube.com/watch?v=x3sLDXHAU-s&t=3136s"]
+      },
+      {
+        "title": "Why is the inflation rate so high?",
+        "content": "A high inflation rate helps to increase the stake on the network and therefor secures it. High inflation incentivises holders to stake their coins.",
+        "references": [
+          "https://minaprotocol.com/blog/mina-token-distribution-and-supply",
+          "https://minaprotocol.com/wp-content/uploads/economicsWhitepaper.pdf"
+        ]
+      },
+      {
+        "title": "When will I start receiving rewards?",
+        "content": "After two full epochs.",
+        "references": []
+      },
+      {
+        "title": "For how long are my coins locked when staking?",
+        "content": "Coins aren't locked, you only delegate your rights to a staking pool. You can access coins at any time.",
+        "references": []
+      },
+      {
+        "title": "Wen moon?",
+        "content": "No.",
+        "references": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
+      }
+    ]
+  },
+  {
+    "title": "Wallets",
+    "items": [
+      {
+        "title": "Can I use MetaMask?",
+        "content": "No, Mina is not an BEP20 or ETH20 token - it is required to use a Wallet specifically for the Mina Protocol.",
+        "references": ["https://www.aurowallet.com/", "https://clor.io/"]
+      }
+    ]
+  },
+  {
+    "title": "DeFi and NFTs",
+    "items": [
+      {
+        "title": "Will NFTs and DeFi be possible on Mina?",
+        "content": "Minas version of Smart Contracts, Snapps, are still being worked on. Eventually DeFi and dApps will also come to Mina. Please refer to the Snapps section.",
+        "references": []
+      }
+    ]
+  },
+  {
+    "title": "Snapps and SnarkyJS",
+    "items": [
+      {
+        "title": "What are Snapps?",
+        "content": "Snapps are Minas version of Smart Contracts with zk-SNARKs.",
+        "references": ["https://www.youtube.com/watch?v=H_JQjPDwAH0"]
+      },
+      {
+        "title": "Can I use Solidity to write Snapps?",
+        "content": "No, Snapps will be written in TypeScript.",
+        "references": ["https://github.com/o1-labs/snarkyjs"]
+      },
+      {
+        "title": "What is SnarkyJS?",
+        "content": "A TypeScript framework for zk-SNARKs and Snapps.",
+        "references": ["https://github.com/o1-labs/snarkyjs"]
+      }
+    ]
+  }
+]

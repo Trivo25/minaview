@@ -23,9 +23,9 @@
               <p class="content" v-html="content"></p>
             </div>
             <div class="ref-wrapper">
+              <span v-if="references.length != 0">References</span><br>
               <template v-for="(ref, r) in references">
                 <div :key="r">
-                  <span>References</span><br>
                   <span class="">[{{ r }}]</span> <a class="ref-link" :href="ref" target="_blank">{{ ref }}</a>
                 </div>
               </template>

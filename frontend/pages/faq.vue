@@ -90,6 +90,7 @@ export default {
   justify-content: left;
   text-align: left;
   float: left;
+  margin-bottom: 25px;
 }
 
 .sub-section {

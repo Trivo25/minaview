@@ -12,8 +12,10 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
+        command_timeout: 30m
+        script_stop: true
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: git clone https://github.com/Trivo25/mina-view && cd mina-view/frontend && yarn install && yarn generate
+        script: git clone https://github.com/Trivo25/mina-view && cd mina-view/frontend && yarn install && yarn generate && rm -f -r /var/www/html && mv dist /var/www/html

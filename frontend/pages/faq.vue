@@ -1,29 +1,31 @@
 <template>
-  <div class="faq">
-    <h1 class="faq-title">Frequently Asked Questions</h1>
-    <div class="search-form-wrapper">
-      <v-text-field
-        placeholder="Searching for .."
-        class="search-form"
-        v-model="filter"
-      >
+  <div class="bg">
+    <div class="faq">
+      <h1 class="faq-title">Frequently Asked Questions</h1>
+      <div class="search-form-wrapper">
+        <v-text-field
+          placeholder="Searching for .."
+          class="search-form"
+          v-model="filter"
+        >
 
-      </v-text-field>
-    </div>
-    <div class="content">
+        </v-text-field>
+      </div>
+      <div class="content">
 
-      <template v-for="(subsection, s) in filteredItems">
-        <div :key="s">
-          <h2 class="sub-section">{{(s + 1) + ' - ' + subsection.title}}</h2> 
-          <v-divider></v-divider>
-          <template v-for="(question, i) in subsection.items">
-            <div :key="i">
-              <Drawer :selected="selectedHash" :id="(s + 1) + '.' +(i + 1) + ' - '" :title="question.title" :content="question.content" :references="question.references" />
-            </div>
-          </template>
-        </div>
-      </template>
+        <template v-for="(subsection, s) in filteredItems">
+          <div :key="s">
+            <h2 class="sub-section">{{(s + 1) + ' - ' + subsection.title}}</h2> 
+            <v-divider></v-divider>
+            <template v-for="(question, i) in subsection.items">
+              <div :key="i">
+                <Drawer :selected="selectedHash" :id="(s + 1) + '.' +(i + 1) + ' - '" :title="question.title" :content="question.content" :references="question.references" />
+              </div>
+            </template>
+          </div>
+        </template>
 
+      </div>
     </div>
   </div>
 </template>
@@ -229,12 +231,18 @@ export default {
 
 
 <style scoped>
-
+.bg {
+  background-color: rgba(0, 0, 0, 0.186);
+  border-radius: 5px;
+  height: 100%;
+  display: flex;
+  padding: 15px;
+}
 .faq {
   justify-content: center;
   text-align: center;
   width: 100%;
-  height: auto;
+  height: 100% !important;
 }
 
 .content {

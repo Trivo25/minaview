@@ -7,13 +7,39 @@
         "content": "Zk-SNARK is an acronym that stands for “Zero-Knowledge Succinct Non-Interactive Argument of Knowledge.” A zk-SNARK is a cryptographic proof that allows one party to prove it possesses certain information without revealing that information. This proof is made possible using a secret key created before the transaction takes place.",
         "references": [
           "https://minaprotocol.com/blog/what-are-zk-snarks",
-          "https://www.youtube.com/watch?v=GvwYJDzzI-g"
+          "https://www.youtube.com/watch?v=GvwYJDzzI-g",
+          "https://vitalik.ca/general/2021/01/26/snarks.html"
+        ]
+      },
+      {
+        "title": "Where can I learn more about the tech behind Mina?",
+        "content": "Mina Protocol has an official YouTube series explaining the tech behind the protocol. Check out the links below.",
+        "references": [
+          "https://www.youtube.com/c/MinaProtocol/videos",
+          "https://minaprotocol.com/get-started",
+          "https://minaprotocol.com/tech",
+          "https://docs.minaprotocol.com/en"
+        ]
+      },
+      {
+        "title": "What makes Mina special?",
+        "content": "Mina is the first layer one protocol that utilizes zk-SNARKs. Zk-SNARKs allow for high scalability, security and decentralisation - trying to solve the 'Blockchain Trilemma'.",
+        "references": [
+          "https://minaprotocol.com/blog/solving-the-scalability-trilemma",
+          "https://vitalik.ca/general/2021/01/26/snarks.html"
         ]
       },
       {
         "title": "Are Archive Node essential for the network to run?",
         "content": "No, they are not essential for the network to work as intended. Archive nodes are simply a node that provides convienient benefits of collecting the transaction history for services like Wallets or Blockexplorers.",
         "references": ["https://docs.minaprotocol.com/en/advanced/archive-node"]
+      },
+      {
+        "title": "Where can I find a roadmap?",
+        "content": "Check out the Product Priorities blog post below.",
+        "references": [
+          "https://minaprotocol.com/blog/mina-protocol-product-priorities-mina-foundation-mission"
+        ]
       }
     ]
   },
@@ -73,6 +99,16 @@
       {
         "title": "Can I use MetaMask?",
         "content": "No, Mina is not an BEP20 or ETH20 token - it is required to use a Wallet specifically for the Mina Protocol.",
+        "references": ["https://www.aurowallet.com/", "https://clor.io/"]
+      },
+      {
+        "title": "Will there be an official Wallet by the Foundation?",
+        "content": "Probably not. Community wallets (Auro and Clorio) have been audited and are secure according to the audit. However, Mina has an official ClientSDK and a CLI where you can generate a key yourself.",
+        "references": ["https://www.aurowallet.com/", "https://clor.io/"]
+      },
+      {
+        "title": "What wallet should I use?",
+        "content": "Both Auro and Clorio wallet have been audited. Alternatively you could also use the Mina ClientSDK or CLI.",
         "references": ["https://www.aurowallet.com/", "https://clor.io/"]
       }
     ]

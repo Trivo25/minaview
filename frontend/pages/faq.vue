@@ -82,6 +82,11 @@ export default {
                     ]
                   },
                   {
+                    "title": "Why are Archive Nodes stored on Google Cloud?",
+                    "content": "They aren't. Everyone can run an archive node and many do, they aren't stored on Google Cloud or any similar centralized cloud service.",
+                    "references": ["https://medium.com/minaprotocol/answering-community-questions-and-whats-ahead-for-mina-d771fa94489b"]
+                  },
+                  {
                     "title": "Are Archive Node essential for the network to run?",
                     "content": "No, they are not essential for the network to work as intended. Archive nodes are simply a node that provides convienient benefits of collecting the transaction history for services like Wallets or Blockexplorers.",
                     "references": ["https://docs.minaprotocol.com/en/advanced/archive-node"]
